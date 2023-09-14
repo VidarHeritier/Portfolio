@@ -1,3 +1,6 @@
+/**Welcome div */
+const welcome = document.querySelector("#welcome");
+
 /**Hamburger menu and items*/
 const hamburgerMenu = document.querySelector("#ham-container");
 const hamburgerItems = document.querySelectorAll(".ham");
@@ -6,6 +9,7 @@ const hamburgerItem2 = document.querySelector(".ham2");
 const hamburgerItem3 = document.querySelector(".ham3");
 
 /**Menu items */
+const menuItems = document.querySelector(".menu-items");
 const menuItem1 = document.querySelector(".menu-item1");
 const menuItem2 = document.querySelector(".menu-item2");
 const menuItem3 = document.querySelector(".menu-item3");
@@ -20,7 +24,6 @@ hamburgerMenu.addEventListener(
     hamburgerMenu.style.animation = "moveMenu 1s forwards";
 
     createLinks();
-    menuAddClasses();
   },
   { once: true }
 );
@@ -35,7 +38,7 @@ const createLinks = () => {
 
   const project = document.createElement("div");
   const projectText = document.createElement("h3");
-  projectText.textContent = "Project";
+  projectText.textContent = "Projects";
   project.append(projectText);
   hamburgerItem2.append(project);
 
@@ -46,16 +49,32 @@ const createLinks = () => {
   hamburgerItem3.append(contact);
 };
 
-/**Transforming hamburger menu classes to link classes */
-const menuAddClasses = () => {
-  hamburgerItem1.classList.add("menu-item1");
-  hamburgerItem2.classList.add("menu-item2");
-  hamburgerItem3.classList.add("menu-item3");
-};
+/**Make menu item1 into its own page */
 
-/**Make menu items into their own page */
-const makeMenuIntoFullPage = () => {
-  hamburgerItem1.style.height = "100rem";
-};
+menuItem1.addEventListener("click", (event) => {
+  menuItem2.remove();
+  menuItem3.remove();
+  welcome.remove();
+  menuItem1.style.animation = "expandMenuItem1 1.5s forwards";
+  menuItem1.classList.remove("ham");
+});
 
-/**Run make full page */
+/**Make menu item1 into its own page */
+
+menuItem2.addEventListener("click", (event) => {
+  menuItem1.remove();
+  menuItem3.remove();
+  welcome.remove();
+  menuItem2.style.animation = "expandMenuItem2 1.5s forwards";
+  menuItem2.classList.remove("ham");
+});
+
+/**Make menu item1 into its own page */
+
+menuItem3.addEventListener("click", (event) => {
+  menuItem2.remove();
+  menuItem1.remove();
+  welcome.remove();
+  menuItem3.style.animation = "expandMenuItem3 1.5s forwards";
+  menuItem3.classList.remove("ham");
+});
