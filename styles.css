@@ -137,20 +137,22 @@ body {
   color: whitesmoke;
   position: absolute;
 }
+.menu-bar {
+  display: flex;
+  justify-content: center;
+}
 .project-header {
   font-size: 2.5vw;
   width: fit-content;
   color: rgb(244, 245, 224);
   text-shadow: 0px 0px 5px rgb(115, 114, 114);
-  position: relative;
-  margin-right: 45vw;
 }
 .projects {
   display: flex;
   flex-direction: row;
   width: 200%;
   justify-content: space-between;
-  transform: translateX(-45vw);
+  transform: translateX(-50vw);
   margin-top: 15vh;
   font-size: 1.4vw;
   gap: 3vw;
@@ -164,6 +166,7 @@ body {
   margin-bottom: 2vw;
   border: 0.4vw solid rgba(31, 148, 132);
   border-radius: 0.1vw;
+  cursor: pointer;
 }
 .left-arrow {
   width: 0.5vw;
@@ -173,11 +176,11 @@ body {
     rgba(190, 190, 190, 0.1),
     rgba(255, 255, 255, 0)
   );
-  position: relative;
-  top: -8.5vw;
-  left: 45vw;
   transition: filter 0.2s ease-in;
   margin-right: 5vw;
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
 }
 .left-arrow:hover {
   filter: brightness(150%);
@@ -191,7 +194,8 @@ body {
 .left-arrow-style {
   width: 4vw;
   height: 4vw;
-  border: 0.5vw solid rgba(31, 148, 132, 0.6);
+  border: 0.5vw solid rgba(31, 148, 132);
+  filter: drop-shadow(0.2vw -0.2vw 0.1vw black);
   border-radius: 0.5vw;
   border-width: 1vw 0.5vw 0 0;
   transform: translateX(1.6vw) translateY(20vw) rotate(-135deg);
@@ -199,7 +203,8 @@ body {
 .right-arrow-style {
   width: 4vw;
   height: 4vw;
-  border: 0.5vw solid rgba(31, 148, 132, 0.6);
+  border: 0.5vw solid rgba(31, 148, 132);
+  filter: drop-shadow(-0.2vw 0.2vw 0.1vw black);
   border-radius: 0.5vw;
   border-width: 1vw 0.5vw 0 0;
   transform: translateX(-5vw) translateY(20vw) rotate(45deg);
@@ -213,10 +218,10 @@ body {
     rgba(190, 190, 190, 0.1)
   );
   position: relative;
-  top: -8.5vw;
-  right: 55vw;
+  right: 111vw;
   transition: filter 0.2s ease-in;
   margin-left: 5vw;
+  cursor: pointer;
 }
 .right-arrow:hover {
   filter: brightness(150%);
@@ -227,7 +232,10 @@ body {
     rgba(31, 148, 132, 0.3)
   );
 }
-
+.about p {
+  font-size: 4vw;
+  color: rebeccapurple;
+}
 @keyframes spin {
   100% {
     filter: hue-rotate(360deg);
@@ -318,7 +326,7 @@ body {
 }
 @keyframes moveProjectHeader {
   100% {
-    transform: translateY(5vh);
+    transform: translateY(-7vh);
   }
 }
 @keyframes moveUp {
