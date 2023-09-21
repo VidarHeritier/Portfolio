@@ -229,10 +229,10 @@ const populateProjectsPage = () => {
     projectHeaderDiv.classList.add("project-header");
     const projectHeader = document.createElement("h3");
     projectHeader.textContent = "Projects";
-    projectHeaderDiv.style.animation = "moveProjectHeader 1s forwards";
+    projectHeaderDiv.style.animation = "moveHeader 1s forwards";
     projectHeaderDiv.append(projectHeader);
 
-    const menuBar = document.querySelector(".menu-bar");
+    const menuBar = document.querySelector("#navbar");
     projectsDiv.append(project1, project2, project3, project4, project5);
     projectPage.append(leftArrow, projectsDiv, rightArrow);
     main.append(projectPage);
@@ -261,25 +261,48 @@ const populateProjectsPage = () => {
 /**Populating the about page */
 const populateAboutPage = () => {
   deleteChild();
+  if (isPageLoaded === false) {
+    const aboutDiv = document.createElement("div");
+    aboutDiv.classList.add("about");
+    const aboutText = document.createElement("p");
+    aboutText.textContent = "";
+    aboutDiv.append(aboutText);
+    main.append(aboutDiv);
 
-  const aboutDiv = document.createElement("div");
-  aboutDiv.classList.add("about");
-  const aboutText = document.createElement("p");
-  aboutText.textContent = "lorem20 lorem20 lorem20 lorem20";
-  aboutDiv.append(aboutText);
-  main.append(aboutDiv);
+    const menuBar = document.querySelector("#navbar");
+    const aboutHeaderDiv = document.createElement("div");
+    aboutHeaderDiv.classList.add("about-header");
+    const aboutHeader = document.createElement("h3");
+    aboutHeader.textContent = "About";
+    aboutHeaderDiv.style.animation = "moveHeader 1s forwards";
+    aboutHeaderDiv.append(aboutHeader);
+    menuBar.append(aboutHeaderDiv);
+  }
+
+  isPageLoaded = true;
 };
 
 /**Populating the contact page */
 const populateContactPage = () => {
   deleteChild();
+  if (isPageLoaded === false) {
+    const contactDiv = document.createElement("div");
+    contactDiv.classList.add("contact");
+    const contactText = document.createElement("p");
+    contactText.textContent = "Contact me pls";
+    contactDiv.append(contactText);
+    main.append(contactDiv);
 
-  const contactDiv = document.createElement("div");
-  contactDiv.classList.add("contact");
-  const contactText = document.createElement("p");
-  contactText.textContent = "Contact me pls";
-  contactDiv.append(contactText);
-  main.append(contactDiv);
+    const menuBar = document.querySelector("#navbar");
+    const contactHeaderDiv = document.createElement("div");
+    contactHeaderDiv.classList.add("contact-header");
+    const contactHeader = document.createElement("h3");
+    contactHeader.textContent = "Contact";
+    contactHeaderDiv.style.animation = "moveHeader 1s forwards";
+    contactHeaderDiv.append(contactHeader);
+    menuBar.append(contactHeaderDiv);
+  }
+  isPageLoaded = true;
 };
 
 /**Recreate hamburger menu */
