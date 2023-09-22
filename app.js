@@ -232,11 +232,11 @@ const populateProjectsPage = () => {
     projectHeaderDiv.style.animation = "moveHeader 1s forwards";
     projectHeaderDiv.append(projectHeader);
 
-    const menuBar = document.querySelector("#navbar");
+    const navbar = document.querySelector("#navbar");
     projectsDiv.append(project1, project2, project3, project4, project5);
     projectPage.append(leftArrow, projectsDiv, rightArrow);
     main.append(projectPage);
-    menuBar.append(projectHeaderDiv);
+    navbar.append(projectHeaderDiv);
 
     /**Mouse over functionality for the carousel */
     const stepWidth = 10;
@@ -265,18 +265,18 @@ const populateAboutPage = () => {
     const aboutDiv = document.createElement("div");
     aboutDiv.classList.add("about");
     const aboutText = document.createElement("p");
-    aboutText.textContent = "";
+    aboutText.textContent = "Ich heisse/je m'appelle Vidar";
     aboutDiv.append(aboutText);
     main.append(aboutDiv);
 
-    const menuBar = document.querySelector("#navbar");
+    const navbar = document.querySelector("#navbar");
     const aboutHeaderDiv = document.createElement("div");
     aboutHeaderDiv.classList.add("about-header");
     const aboutHeader = document.createElement("h3");
     aboutHeader.textContent = "About";
     aboutHeaderDiv.style.animation = "moveHeader 1s forwards";
     aboutHeaderDiv.append(aboutHeader);
-    menuBar.append(aboutHeaderDiv);
+    navbar.append(aboutHeaderDiv);
   }
 
   isPageLoaded = true;
@@ -293,14 +293,14 @@ const populateContactPage = () => {
     contactDiv.append(contactText);
     main.append(contactDiv);
 
-    const menuBar = document.querySelector("#navbar");
+    const navbar = document.querySelector("#navbar");
     const contactHeaderDiv = document.createElement("div");
     contactHeaderDiv.classList.add("contact-header");
     const contactHeader = document.createElement("h3");
     contactHeader.textContent = "Contact";
     contactHeaderDiv.style.animation = "moveHeader 1s forwards";
     contactHeaderDiv.append(contactHeader);
-    menuBar.append(contactHeaderDiv);
+    navbar.append(contactHeaderDiv);
   }
   isPageLoaded = true;
 };
