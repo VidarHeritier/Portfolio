@@ -80,3 +80,25 @@ contactLink.addEventListener("click", (event) => {
     element.style.visibility = "visible";
   });
 });
+
+/**Logo anim */
+const logo = document.querySelector("#logo");
+
+logo.addEventListener("mouseover", (event) => {
+  logo.style.animation = "spin 1s infinite linear";
+  logo.style.scale = "1.2";
+});
+
+logo.addEventListener("mouseout", (event) => {
+  logo.style.animation = "spin 30s infinite linear";
+  logo.style.scale = "1";
+});
+
+/**Logo frontpage */
+logo.addEventListener("click", (event) => {
+  welcomePage.style.visibility = "visible";
+  aboutPage.style.visibility = "hidden";
+  projectPage.style.visibility = "hidden";
+  contactPage.style.visibility = "hidden";
+  placeholder.textContent = "";
+});
