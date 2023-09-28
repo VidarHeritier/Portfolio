@@ -197,21 +197,28 @@ body {
 .pages {
   color: rgb(244, 245, 224);
   font-size: 1.3vw;
+  display: flex;
+  justify-content: center;
 }
 .about-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-20vw);
+  transform: translateY(-27vw);
+}
+.about-text {
+  width: 60%;
+  line-height: 0.3vh;
+  scale: 0.6;
 }
 .project-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-22vw);
+  transform: translateY(-53vw);
 }
 .contact-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-24vw);
+  transform: translateY(-55vw);
 }
 .placeholder {
   text-align: center;
@@ -220,6 +227,13 @@ body {
   height: 8vw;
   font-size: 4vw;
   padding-top: 1vw;
+}
+
+@keyframes unscramble {
+  100% {
+    line-height: 130%;
+    scale: 1;
+  }
 }
 @keyframes pageHeader {
   0% {
@@ -283,5 +297,21 @@ body {
     opacity: 0.8;
     background-color: rgb(115, 114, 114, 0.5);
     font-size: 2.5vw;
+  }
+}
+@keyframes backIn {
+  0% {
+    transform: translateX(50vw);
+  }
+  70% {
+    transform: translateX(-5vw);
+  }
+}
+@keyframes backIn2 {
+  0% {
+    transform: translateX(50vw);
+  }
+  60% {
+    transform: translateX(-3vw);
   }
 }
