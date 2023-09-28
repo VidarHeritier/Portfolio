@@ -33,6 +33,7 @@ const contactPage = document.querySelector(".contact-page");
 const placeholder = document.querySelector(".placeholder-text");
 
 /**Make pages */
+/**About page */
 aboutLink.addEventListener("click", (event) => {
   aboutPage.style.visibility = "visible";
   projectPage.style.visibility = "hidden";
@@ -41,11 +42,14 @@ aboutLink.addEventListener("click", (event) => {
     element.style.visibility = "hidden";
   });
   placeholder.textContent = "About";
+  placeholder.style.animation = "pageHeader 0.3s forwards";
   hamburger.style.transform = "translateX(0vw)";
   hamburgerItems.forEach((element) => {
     element.style.visibility = "visible";
   });
 });
+
+/**Project page */
 projectLink.addEventListener("click", (event) => {
   projectPage.style.visibility = "visible";
   contactPage.style.visibility = "hidden";
@@ -54,11 +58,14 @@ projectLink.addEventListener("click", (event) => {
     element.style.visibility = "hidden";
   });
   placeholder.textContent = "Projects";
+  placeholder.style.animation = "pageHeader 0.3s forwards";
   hamburger.style.transform = "translateX(0vw)";
   hamburgerItems.forEach((element) => {
     element.style.visibility = "visible";
   });
 });
+
+/**Contact page */
 contactLink.addEventListener("click", (event) => {
   contactPage.style.visibility = "visible";
   projectPage.style.visibility = "hidden";
@@ -67,6 +74,7 @@ contactLink.addEventListener("click", (event) => {
     element.style.visibility = "hidden";
   });
   placeholder.textContent = "Contact";
+  placeholder.style.animation = "pageHeader 0.3s forwards";
   hamburger.style.transform = "translateX(0vw)";
   hamburgerItems.forEach((element) => {
     element.style.visibility = "visible";
