@@ -217,7 +217,7 @@ contactLink.addEventListener("click", () =>
 
 logo.addEventListener("mouseover", () => {
   playAnimation(logo, "spin 1s infinite linear");
-  logo.style.scale = "1.2";
+  playAnimation(logo, "scale 1.3s ease-in");
 });
 
 logo.addEventListener("mouseout", resetLogo);

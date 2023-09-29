@@ -231,7 +231,19 @@ body {
 .brepen {
   color: rgb(31, 148, 132);
 }
-
+.tel {
+  text-decoration: none;
+  color: red;
+  font-size: 30rem;
+}
+.tel:visited {
+  color: blue;
+}
+@keyframes scale {
+  100% {
+    scale: 1.2;
+  }
+}
 @keyframes unscramble {
   100% {
     line-height: 130%;
