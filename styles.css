@@ -223,10 +223,13 @@ body {
 .placeholder {
   text-align: center;
   text-shadow: 0.15vw 0.15vw 0.2vw rgb(31, 148, 132);
-  width: 25vw;
+  width: 55vw;
   height: 8vw;
   font-size: 4vw;
   padding-top: 1vw;
+}
+.brepen {
+  color: rgb(31, 148, 132);
 }
 
 @keyframes unscramble {
