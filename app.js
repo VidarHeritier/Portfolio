@@ -1,13 +1,33 @@
-const hamburger = document.querySelector("#ham-container");
-const hamburgerItems = document.querySelectorAll(".ham");
+/**Querries */
+/** Menu*/
 const menu = document.querySelector("#menu-container");
 const menuItems = document.querySelectorAll(".menu");
-const welcomePage = document.querySelector(".welcome-page");
+/**Logo */
 const logo = document.querySelector("#logo");
+/**Hamburger */
+const hamburger = document.querySelector("#ham-container");
+const hamburgerItems = document.querySelectorAll(".ham");
 const hamburgerItem1 = document.querySelector(".ham1");
 const hamburgerItem2 = document.querySelector(".ham2");
 const hamburgerItem3 = document.querySelector(".ham3");
+/**Welcome page */
+const welcomePage = document.querySelector(".welcome-page");
+/**About page */
+const aboutLink = document.querySelector(".menu1");
+const aboutPage = document.querySelector(".about-page");
+const aboutText = document.querySelector(".about-text");
+/**Project page */
+const projectLink = document.querySelector(".menu2");
+const projectPage = document.querySelector(".project-page");
+const projectText = document.querySelector(".project-text");
+/**Contact Page */
+const contactLink = document.querySelector(".menu3");
+const contactPage = document.querySelector(".contact-page");
+const contactText = document.querySelector(".contact-text");
+/**Page Header */
+const placeholder = document.querySelector(".placeholder-text");
 
+/** Anim control*/
 let isAnimationPlaying = false;
 
 const playAnimation = (element, animationName) => {
@@ -28,9 +48,9 @@ const showMenu = () => {
   menu.style.visibility = "visible";
   menu.style.animation = "menuAnim .3s ease";
   menuItems.forEach((element) => (element.style.visibility = "visible"));
-  menu.style.position = "relative";
-  menu.style.left = "0vw";
-  menu.style.justifyContent = "center";
+  //   menu.style.position = "relative";
+  //   menu.style.left = "0vw";
+  //   menu.style.justifyContent = "center";
   welcomePage.style.visibility = "hidden";
   restartAnimation(menu, "menuAnim .3s ease");
 };
@@ -94,17 +114,6 @@ const showWelcomePage = () => {
 };
 
 hamburger.addEventListener("click", showMenu);
-
-const aboutLink = document.querySelector(".menu1");
-const projectLink = document.querySelector(".menu2");
-const contactLink = document.querySelector(".menu3");
-const aboutPage = document.querySelector(".about-page");
-const projectPage = document.querySelector(".project-page");
-const contactPage = document.querySelector(".contact-page");
-const placeholder = document.querySelector(".placeholder-text");
-const aboutText = document.querySelector(".about-text");
-const projectText = document.querySelector(".project-text");
-const contactText = document.querySelector(".contact-text");
 
 /**Links to pages */
 aboutLink.addEventListener("click", () =>
@@ -190,7 +199,9 @@ function handlePageChange(direction) {
     case 2:
       switchToPage(contactPage, "Contact", contactText);
       break;
-    default:
-      break;
   }
+  hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
+  restartAnimation(hamburgerItem1, "");
+  restartAnimation(hamburgerItem2, "");
+  restartAnimation(hamburgerItem3, "");
 }
