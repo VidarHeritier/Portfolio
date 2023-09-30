@@ -93,6 +93,10 @@ const aboutText = document.querySelector(".about-text");
 const projectText = document.querySelector(".project-text");
 const contactText = document.querySelector(".contact-text");
 
+let currentPageIndex = 0;
+const pages = [welcomePage, aboutPage, projectPage, contactPage];
+
+/**Links to pages */
 aboutLink.addEventListener("click", () =>
   switchToPage(aboutPage, "About", aboutText, "unscramble 0.6s forwards")
 );
@@ -121,3 +125,53 @@ prebensAssRay.forEach((ass, i) => {
     prebenStyle.innerHTML += `<span class="brepen">${ass}</span> `;
   }
 });
+
+/**Cycle through pages on arrow press and scroll*/
+const scrollSensitivity = 50;
+
+let isScrolling = false;
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+    handlePageChange(event.key === "ArrowUp" ? -1 : 1);
+  }
+});
+
+document.addEventListener("wheel", (event) => {
+  const scrollDirection = event.deltaY > 0 ? 1 : -1;
+
+  if (Math.abs(event.deltaY) > scrollSensitivity && !isScrolling) {
+    handlePageChange(scrollDirection);
+    isScrolling = true;
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 800);
+  }
+});
+
+function handlePageChange(direction) {
+  pages[currentPageIndex].style.visibility = "hidden";
+
+  currentPageIndex =
+    (currentPageIndex + direction + pages.length) % pages.length;
+
+  pages[currentPageIndex].style.visibility = "visible";
+
+  switch (currentPageIndex) {
+    case 0:
+      showWelcomePage();
+      break;
+    case 1:
+      switchToPage(aboutPage, "About", aboutText, "unscramble 0.6s forwards");
+      break;
+    case 2:
+      switchToPage(projectPage, "Projects", projectText);
+      break;
+    case 3:
+      switchToPage(contactPage, "Contact", contactText);
+      break;
+    default:
+      break;
+  }
+}
