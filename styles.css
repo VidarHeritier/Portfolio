@@ -19,7 +19,10 @@ body {
   font-weight: bolder;
   overflow: hidden;
 }
-
+canvas {
+  width: 0;
+  height: 0;
+}
 #logo {
   align-self: center;
   width: 6%;
