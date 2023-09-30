@@ -141,7 +141,7 @@ prebensAssRay.forEach((ass, i) => {
   if (i < prebensAssRay.length - 1) {
     prebenStyle.innerHTML += `<span class="brepen">${ass}</span>, `;
   } else {
-    prebenStyle.innerHTML += `<span class="brepen">${ass}</span> `;
+    prebenStyle.innerHTML += `<span class="brepen">${ass}</span>`;
   }
 });
 
