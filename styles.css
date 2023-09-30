@@ -209,12 +209,6 @@ canvas {
     opacity: 1;
   }
 }
-@keyframes swirl {
-  100% {
-    transform: rotate(360deg);
-    opacity: 0.3;
-  }
-}
 @keyframes unscramble {
   100% {
     line-height: 130%;
@@ -229,6 +223,19 @@ canvas {
   }
   100% {
     visibility: visible;
+  }
+}
+@keyframes scale {
+  100% {
+    scale: 1.35;
+  }
+}
+@keyframes rotate {
+  50% {
+    transform: rotate(7deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 @keyframes spin {

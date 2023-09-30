@@ -30,9 +30,10 @@ const placeholder = document.querySelector(".placeholder-text");
 /** Anim control*/
 let isAnimationPlaying = false;
 
-const playAnimation = (element, animationName) => {
+const playAnimation = (element, ...animationNames) => {
   if (!isAnimationPlaying) {
-    element.style.animation = animationName;
+    const animations = animationNames.join(", ");
+    element.style.animation = animations;
     isAnimationPlaying = true;
   }
 };
@@ -127,7 +128,10 @@ contactLink.addEventListener("click", () =>
 );
 /**LOGO anim */
 logo.addEventListener("mouseover", () => {
-  playAnimation(logo, "swirl .06s infinite linear");
+  playAnimation(
+    logo,
+    "spin 2s infinite linear, scale 0.5s ease-out forwards, rotate 2.2s ease"
+  );
 });
 
 logo.addEventListener("mouseout", resetLogo);
@@ -153,6 +157,27 @@ const scrollSensitivity = 50;
 
 let isScrolling = false;
 let isArrowPress = false;
+let touchStartY;
+let touchStartX;
+
+document.addEventListener("touchstart", (event) => {
+  touchStartY = event.touches[0].clientY;
+  touchStartX = event.touches[0].clientX;
+});
+
+document.addEventListener("touchend", (event) => {
+  const touchEndY = event.changedTouches[0].clientY;
+  const touchEndX = event.changedTouches[0].clientX;
+
+  const deltaY = touchEndY - touchStartY;
+  const deltaX = touchEndX - touchStartX;
+
+  if (Math.abs(deltaY) > Math.abs(deltaX)) {
+    const direction = deltaY > 0 ? 1 : -1;
+    handlePageChange(direction);
+  } else {
+  }
+});
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
