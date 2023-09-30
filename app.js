@@ -138,7 +138,7 @@ prebensAssRay.forEach((ass, i) => {
 
 /**Cycle through pages on arrow press and scroll*/
 let currentPageIndex = 0;
-const pages = [welcomePage, aboutPage, projectPage, contactPage];
+const pages = [aboutPage, projectPage, contactPage];
 
 const scrollSensitivity = 50;
 
@@ -171,6 +171,8 @@ document.addEventListener("wheel", (event) => {
 });
 
 function handlePageChange(direction) {
+  welcomePage.style.visibility = "hidden";
+
   pages[currentPageIndex].style.visibility = "hidden";
 
   currentPageIndex =
@@ -180,15 +182,12 @@ function handlePageChange(direction) {
 
   switch (currentPageIndex) {
     case 0:
-      showWelcomePage();
-      break;
-    case 1:
       switchToPage(aboutPage, "About", aboutText, "unscramble 0.6s forwards");
       break;
-    case 2:
+    case 1:
       switchToPage(projectPage, "Projects", projectText);
       break;
-    case 3:
+    case 2:
       switchToPage(contactPage, "Contact", contactText);
       break;
     default:
