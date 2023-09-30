@@ -76,8 +76,21 @@ const showWelcomePage = () => {
     contactText,
     contactPage,
   ].forEach((pages) => (pages.style.visibility = "hidden"));
+
   placeholder.textContent = "VirVar Vidar";
+
   restartAnimation(placeholder, "pageHeader 0.3s forwards");
+
+  menuItems.forEach((element) => (element.style.visibility = "hidden"));
+
+  hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
+  restartAnimation(hamburgerItem1, "backIn .5s forwards");
+  restartAnimation(hamburgerItem2, "backIn2 .6s forwards");
+  restartAnimation(hamburgerItem3, "backIn .6s forwards");
+  if (pageContent) {
+    pageContent.style.visibility = "visible";
+    restartAnimation(aboutText, "unscramble 0.6s forwards");
+  }
 };
 
 hamburger.addEventListener("click", showMenu);
@@ -92,9 +105,6 @@ const placeholder = document.querySelector(".placeholder-text");
 const aboutText = document.querySelector(".about-text");
 const projectText = document.querySelector(".project-text");
 const contactText = document.querySelector(".contact-text");
-
-let currentPageIndex = 0;
-const pages = [welcomePage, aboutPage, projectPage, contactPage];
 
 /**Links to pages */
 aboutLink.addEventListener("click", () =>
@@ -127,16 +137,26 @@ prebensAssRay.forEach((ass, i) => {
 });
 
 /**Cycle through pages on arrow press and scroll*/
+let currentPageIndex = 0;
+const pages = [welcomePage, aboutPage, projectPage, contactPage];
+
 const scrollSensitivity = 50;
 
 let isScrolling = false;
+let isArrowPress = false;
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-    handlePageChange(event.key === "ArrowUp" ? -1 : 1);
+    if (!isArrowPress) {
+      handlePageChange(event.key === "ArrowUp" ? -1 : 1);
+      isArrowPress = true;
+
+      setTimeout(() => {
+        isArrowPress = false;
+      }, 500);
+    }
   }
 });
-
 document.addEventListener("wheel", (event) => {
   const scrollDirection = event.deltaY > 0 ? 1 : -1;
 
@@ -146,7 +166,7 @@ document.addEventListener("wheel", (event) => {
 
     setTimeout(() => {
       isScrolling = false;
-    }, 800);
+    }, 500);
   }
 });
 
