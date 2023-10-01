@@ -341,7 +341,7 @@ canvas {
     transform: translateY(-115vw);
   }
   .about-page {
-    transform: translateY(-150vw);
+    transform: translateY(-210vw);
     font-size: 3.3vw;
   }
   .project-page {

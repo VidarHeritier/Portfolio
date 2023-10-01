@@ -172,20 +172,24 @@ document.addEventListener("touchend", (event) => {
 
   if (Math.abs(deltaY) > Math.abs(deltaX)) {
     const direction = deltaY > 0 ? 1 : -1;
+    handlePageChange(direction);
+    isScrolling = true;
+
     setTimeout(() => {
-      handlePageChange(direction);
+      isScrolling = false;
     }, 500);
   } else {
     const direction = deltaX > 0 ? 1 : -1;
+    handlePageChange(direction);
+
+    isScrolling = true;
+
     setTimeout(() => {
-      if (direction === 1) {
-        handlePageChange(1);
-      } else {
-        handlePageChange(-1);
-      }
+      isScrolling = false;
     }, 500);
   }
 });
+
 /**Arrows */
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
