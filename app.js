@@ -180,7 +180,11 @@ document.addEventListener("touchend", (event) => {
   } else {
     const direction = deltaX > 0 ? 1 : -1;
     setTimeout(() => {
-      handlePageChange(direction);
+      if (direction === 1) {
+        handlePageChange(1);
+      } else {
+        handlePageChange(-1);
+      }
     }, 500);
   }
 });
