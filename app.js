@@ -154,7 +154,7 @@ prebensAssRay.forEach((ass, i) => {
   }
 });
 
-/**Cycle through pages on arrow press and scroll*/
+/**Cycle through pages on swipe, arrow press and scroll*/
 let currentPageIndex = 0;
 const pages = [aboutPage, projectPage, contactPage];
 
@@ -165,6 +165,7 @@ let isArrowPress = false;
 let touchStartY;
 let touchStartX;
 
+/**Swipe */
 document.addEventListener("touchstart", (event) => {
   touchStartY = event.touches[0].clientY;
   touchStartX = event.touches[0].clientX;
@@ -193,7 +194,7 @@ document.addEventListener("touchend", (event) => {
     }, 500);
   }
 });
-
+/**Arrows */
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
     if (!isArrowPress) {
@@ -206,6 +207,8 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
+
+/**Scroll */
 document.addEventListener("wheel", (event) => {
   const scrollDirection = event.deltaY > 0 ? 1 : -1;
 
@@ -218,7 +221,7 @@ document.addEventListener("wheel", (event) => {
     }, 500);
   }
 });
-
+/**Page change */
 function handlePageChange(direction) {
   welcomePage.style.visibility = "hidden";
 
