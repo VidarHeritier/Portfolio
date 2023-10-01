@@ -174,8 +174,12 @@ document.addEventListener("touchend", (event) => {
 
   if (Math.abs(deltaY) > Math.abs(deltaX)) {
     const direction = deltaY > 0 ? 1 : -1;
-    handlePageChange(direction);
+    setTimeout(() => {
+      handlePageChange(direction);
+    }, 500);
   } else {
+    const direction = deltaX > 0 ? 1 : -1;
+    setTimeout(() => {}, 500);
   }
 });
 
