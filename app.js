@@ -44,27 +44,13 @@ const restartAnimation = (element, animationName) => {
   element.style.animation = animationName;
 };
 
-let isMenuOpen = false;
-
 const showMenu = () => {
-  if (!isMenuOpen) {
-    isMenuOpen = true;
-    hamburgerItems.forEach((element) => (element.style.visibility = "hidden"));
-    menu.style.visibility = "visible";
-    menu.style.animation = "menuAnim .3s ease";
-    menuItems.forEach((element) => (element.style.visibility = "visible"));
-    //   menu.style.position = "relative";
-    //   menu.style.left = "0vw";
-    //   menu.style.justifyContent = "center";
-    welcomePage.style.visibility = "hidden";
-    restartAnimation(menu, "menuAnim .3s ease");
-
-    document.body.style.overflow = "hidden";
-  } else {
-    isMenuOpen = false;
-
-    document.body.style.overflow = "auto";
-  }
+  hamburgerItems.forEach((element) => (element.style.visibility = "hidden"));
+  menu.style.visibility = "visible";
+  menu.style.animation = "menuAnim .3s ease";
+  menuItems.forEach((element) => (element.style.visibility = "visible"));
+  welcomePage.style.visibility = "hidden";
+  restartAnimation(menu, "menuAnim .3s ease");
 };
 
 const switchToPage = (page, headerText, pageContent) => {

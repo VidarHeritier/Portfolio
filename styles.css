@@ -133,7 +133,7 @@ canvas {
   letter-spacing: 0.1vw;
 }
 #welcome h6 {
-  margin-top: 2vw;
+  margin-top: 70vw;
   font-weight: 100;
   filter: hue-rotate(229deg);
   text-shadow: 0.03vw 0.03vw 0 #bebebe, -0.03vw 0.03vw 0 #bebebe,
@@ -148,7 +148,7 @@ canvas {
 .about-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-27vw);
+  transform: translateY(-97vw);
 }
 .about-text {
   width: 60%;
@@ -158,12 +158,12 @@ canvas {
 .project-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-53vw);
+  transform: translateY(-123vw);
 }
 .contact-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-54.7vw);
+  transform: translateY(-124.7vw);
 }
 .placeholder {
   text-align: center;
@@ -336,6 +336,9 @@ canvas {
   .placeholder {
     font-size: 5vw;
     padding-top: 6vw;
+  }
+  .welcome-page {
+    transform: translateY(-115vw);
   }
   .about-page {
     transform: translateY(-150vw);
