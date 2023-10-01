@@ -117,14 +117,20 @@ canvas {
   color: rgb(16, 78, 70);
   text-shadow: 0 0 3px rgb(6, 6, 6), 0 0 3px rgb(6, 6, 6), 0 0 3px rgb(6, 6, 6);
 }
+.welcome-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100vw;
+}
 #welcome {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 5vw;
-  width: 90vw;
   display: flex;
-  flex-direction: column;
-  text-align: center;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100vw;
   margin-left: 6%;
   margin-top: 7.5vw;
   color: rgb(31, 148, 132);
@@ -132,8 +138,15 @@ canvas {
     -0.1vw -0.1vw 0 #bebebe, 0.1vw -0.1vw 0 #bebebe;
   letter-spacing: 0.1vw;
 }
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 50%;
+}
 #welcome h6 {
-  margin-top: 70vw;
+  margin-top: 90vw;
+  width: 45%;
   font-weight: 100;
   filter: hue-rotate(229deg);
   text-shadow: 0.03vw 0.03vw 0 #bebebe, -0.03vw 0.03vw 0 #bebebe,
@@ -148,7 +161,7 @@ canvas {
 .about-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-97vw);
+  transform: translateY(-132vw);
 }
 .about-text {
   width: 60%;
@@ -158,12 +171,12 @@ canvas {
 .project-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-123vw);
+  transform: translateY(-160vw);
 }
 .contact-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-124.7vw);
+  transform: translateY(-161.7vw);
 }
 .placeholder {
   text-align: center;
@@ -200,6 +213,16 @@ canvas {
   border-radius: 1vw;
   background-color: grey;
   box-shadow: rgba(128, 128, 128, 0.456) 0.2vw 0.1vw 0.3vw 0.2vw;
+}
+.vidar {
+  height: 30%;
+  width: 40%;
+  transform: translateY(-20vh);
+  filter: saturate(60%);
+  background-color: #a9b4af;
+  border: 0.5rem solid rgb(6, 6, 6);
+  box-shadow: 0.1vw 0.1vw 0.2vw #bebebe, -0.1vw 0.1vw 0.2vw #bebebe;
+  border-radius: 1.2rem;
 }
 @keyframes menuAnim {
   0% {

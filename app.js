@@ -154,8 +154,6 @@ const scrollSensitivity = 50;
 
 let isScrolling = false;
 let isArrowPress = false;
-let touchStartY;
-let touchStartX;
 
 /**Swipe */
 // document.addEventListener("touchstart", (event) => {
