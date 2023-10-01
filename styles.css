@@ -341,16 +341,16 @@ canvas {
     transform: translateY(-115vw);
   }
   .about-page {
-    transform: translateY(-210vw);
+    transform: translateY(-230vw);
     font-size: 3.3vw;
   }
   .project-page {
-    transform: translateY(-255vw);
+    transform: translateY(-295vw);
     font-size: 3.3vw;
   }
   .contact-page {
     font-size: 3.3vw;
-    transform: translateY(-257vw);
+    transform: translateY(-297vw);
   }
   .about-text {
     width: 85%;
