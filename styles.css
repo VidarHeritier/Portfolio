@@ -362,7 +362,7 @@ canvas {
   }
   .menu-bar {
     height: 75vh;
-    transform: translateY(67.5vh);
+    transform: translateY(63.5vh);
   }
   .menu1 {
     max-height: 25vh;
