@@ -115,13 +115,13 @@ hamburger.addEventListener("click", showMenu);
 
 /**Links to pages */
 aboutLink.addEventListener("click", () =>
-  switchToPage(aboutPage, "About", aboutText, "unscramble 0.6s forwards")
+  switchToPage(aboutPage, "Om", aboutText, "unscramble 0.6s forwards")
 );
 projectLink.addEventListener("click", () =>
-  switchToPage(projectPage, "Projects", projectText)
+  switchToPage(projectPage, "Prosjekter", projectText)
 );
 contactLink.addEventListener("click", () =>
-  switchToPage(contactPage, "Contact", contactText)
+  switchToPage(contactPage, "Kontakt", contactText)
 );
 /**LOGO anim */
 logo.addEventListener("mouseover", () => {
@@ -226,13 +226,13 @@ function handlePageChange(direction) {
 
   switch (currentPageIndex) {
     case 0:
-      switchToPage(aboutPage, "About", aboutText, "unscramble 0.6s forwards");
+      switchToPage(aboutPage, "Om", aboutText, "unscramble 0.6s forwards");
       break;
     case 1:
-      switchToPage(projectPage, "Projects", projectText);
+      switchToPage(projectPage, "Prosjekter", projectText);
       break;
     case 2:
-      switchToPage(contactPage, "Contact", contactText);
+      switchToPage(contactPage, "Kontakt", contactText);
       break;
   }
   hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
