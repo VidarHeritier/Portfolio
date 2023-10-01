@@ -58,6 +58,12 @@ const showMenu = () => {
     //   menu.style.justifyContent = "center";
     welcomePage.style.visibility = "hidden";
     restartAnimation(menu, "menuAnim .3s ease");
+
+    document.body.style.overflow = "hidden";
+  } else {
+    isMenuOpen = false;
+
+    document.body.style.overflow = "auto";
   }
 };
 
