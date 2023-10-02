@@ -196,8 +196,8 @@ window.addEventListener("touchend", function (e) {
   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
   const deltaTime = new Date() - initialTime;
 
-  if (deltaX <= -30 || deltaX >= 30) {
-    swipeDirection = deltaX <= -30 ? -1 : 1;
+  if (Math.abs(deltaX) >= 30 && deltaY <= 100 && deltaTime <= 300) {
+    swipeDirection = deltaX > 0 ? 1 : -1;
 
     isSwipe = true;
 
