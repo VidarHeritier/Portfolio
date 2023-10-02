@@ -189,7 +189,7 @@ let isSwipe = false;
 //   }
 // });
 
-let initialX, initialY, initialTime;
+let swipeDirection;
 
 window.addEventListener("touchstart", function (e) {
   initialX = e.touches[0].clientX;
@@ -207,7 +207,7 @@ window.addEventListener("touchend", function (e) {
   console.log("DeltaTime:", deltaTime);
 
   if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
-    handlePageChange(deltaY);
+    swipeDirection = deltaY > 0 ? 1 : -1;
     isSwipe = true;
 
     setTimeout(() => {
@@ -249,7 +249,7 @@ function handlePageChange(direction) {
   pages[currentPageIndex].style.visibility = "hidden";
 
   currentPageIndex =
-    (currentPageIndex + direction + pages.length) % pages.length;
+    (currentPageIndex + swipeDirection + pages.length) % pages.length;
 
   pages[currentPageIndex].style.visibility = "visible";
 
