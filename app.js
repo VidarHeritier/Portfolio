@@ -196,17 +196,16 @@ window.addEventListener("touchend", function (e) {
   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
   const deltaTime = new Date() - initialTime;
 
-
   if (deltaX <= -30 || deltaX >= 30) {
-  
-  swipeDirection = deltaX <= -30 ? -1 : 1;
+    swipeDirection = deltaX <= -30 ? -1 : 1;
 
-  isSwipe = true;
+    isSwipe = true;
 
-  setTimeout(() => {
-    isSwipe = false;
-  }, 500);
-}
+    setTimeout(() => {
+      isSwipe = false;
+    }, 500);
+  }
+});
 /**Arrows */
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
