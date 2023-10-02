@@ -202,19 +202,17 @@ window.addEventListener("touchend", function (e) {
   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
   const deltaTime = new Date() - initialTime;
 
-  console.log("DeltaX:", deltaX);
-  console.log("DeltaY:", deltaY);
-  console.log("DeltaTime:", deltaTime);
-
-  if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
-    swipeDirection = deltaY > 0 ? 1 : -1;
+  if (Math.abs(deltaX) >= 30 && deltaY <= 100 && deltaTime <= 300) {
+    swipeDirection = deltaX > 0 ? 1 : -1;
     isSwipe = true;
 
     setTimeout(() => {
       isSwipe = false;
+      handlePageChange(swipeDirection);
     }, 500);
   }
 });
+
 /**Arrows */
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
