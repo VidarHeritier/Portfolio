@@ -189,21 +189,22 @@ let isSwipe = false;
 //   }
 // });
 
-const touchRegionElement = document.getElementById("touch-region");
-const outputElement = document.getElementById("output");
-
 let initialX, initialY, initialTime;
 
-touchRegionElement.addEventListener("touchstart", function (e) {
+window.addEventListener("touchstart", function (e) {
   initialX = e.touches[0].clientX;
   initialY = e.touches[0].clientY;
   initialTime = new Date();
 });
 
-touchRegionElement.addEventListener("touchend", function (e) {
+window.addEventListener("touchend", function (e) {
   const deltaX = e.changedTouches[0].clientX - initialX;
   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
   const deltaTime = new Date() - initialTime;
+
+  console.log("DeltaX:", deltaX);
+  console.log("DeltaY:", deltaY);
+  console.log("DeltaTime:", deltaTime);
 
   if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
     isSwipe = true;
