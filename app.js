@@ -207,6 +207,7 @@ window.addEventListener("touchend", function (e) {
   console.log("DeltaTime:", deltaTime);
 
   if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
+    handlePageChange(deltaX);
     isSwipe = true;
 
     setTimeout(() => {
