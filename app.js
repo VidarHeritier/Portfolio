@@ -206,6 +206,8 @@ touchRegionElement.addEventListener("touchend", function (e) {
   const deltaTime = new Date() - initialTime;
 
   if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
+    isSwipe = true;
+
     setTimeout(() => {
       isSwipe = false;
     }, 500);
