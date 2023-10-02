@@ -202,14 +202,11 @@ window.addEventListener("touchend", function (e) {
   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
   const deltaTime = new Date() - initialTime;
 
-  if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
-    handlePageChange(deltaX);
-    isSwipe = true;
+  console.log("DeltaX:", deltaX);
+  console.log("DeltaY:", deltaY);
+  console.log("DeltaTime:", deltaTime);
 
-    setTimeout(() => {
-      isSwipe = false;
-    }, 500);
-  } else if (deltaX <= 30 && deltaY <= 100 && deltaTime <= 300) {
+  if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
     handlePageChange(deltaX);
     isSwipe = true;
 
@@ -218,33 +215,6 @@ window.addEventListener("touchend", function (e) {
     }, 500);
   }
 });
-
-// let initialX, initialY, initialTime;
-
-// window.addEventListener("touchstart", function (e) {
-//   initialX = e.touches[0].clientX;
-//   initialY = e.touches[0].clientY;
-//   initialTime = new Date();
-// });
-
-// window.addEventListener("touchend", function (e) {
-//   const deltaX = e.changedTouches[0].clientX - initialX;
-//   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
-//   const deltaTime = new Date() - initialTime;
-
-//   console.log("DeltaX:", deltaX);
-//   console.log("DeltaY:", deltaY);
-//   console.log("DeltaTime:", deltaTime);
-
-//   if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
-//     handlePageChange(deltaX);
-//     isSwipe = true;
-
-//     setTimeout(() => {
-//       isSwipe = false;
-//     }, 500);
-//   }
-// });
 /**Arrows */
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
