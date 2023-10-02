@@ -157,38 +157,6 @@ let isArrowPress = false;
 let isSwipe = false;
 
 /**Swipe */
-// document.addEventListener("touchstart", (event) => {
-//   touchStartY = event.touches[0].clientY;
-//   touchStartX = event.touches[0].clientX;
-// });
-
-// document.addEventListener("touchend", (event) => {
-//   const touchEndY = event.changedTouches[0].clientY;
-//   const touchEndX = event.changedTouches[0].clientX;
-
-//   const deltaY = touchEndY - touchStartY;
-//   const deltaX = touchEndX - touchStartX;
-
-//   if (Math.abs(deltaY) > Math.abs(deltaX)) {
-//     const direction = deltaY > 0 ? 1 : -1;
-//     handlePageChange(direction);
-//     isScrolling = true;
-
-//     setTimeout(() => {
-//       isScrolling = false;
-//     }, 500);
-//   } else {
-//     const direction = deltaX > 0 ? 1 : -1;
-//     handlePageChange(direction);
-
-//     isScrolling = true;
-
-//     setTimeout(() => {
-//       isScrolling = false;
-//     }, 500);
-//   }
-// });
-
 let swipeDirection;
 
 window.addEventListener("touchend", function (e) {
