@@ -191,12 +191,6 @@ let isSwipe = false;
 
 let swipeDirection;
 
-window.addEventListener("touchstart", function (e) {
-  initialX = e.touches[0].clientX;
-  initialY = e.touches[0].clientY;
-  initialTime = new Date();
-});
-
 window.addEventListener("touchend", function (e) {
   const deltaX = e.changedTouches[0].clientX - initialX;
   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
@@ -206,8 +200,13 @@ window.addEventListener("touchend", function (e) {
   console.log("DeltaY:", deltaY);
   console.log("DeltaTime:", deltaTime);
 
-  if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
-    swipeDirection = deltaY > 0 ? 1 : -1;
+  if (deltaX <= -30) {
+    swipeDirection = -1;
+  } else if (deltaX >= 30) {
+    swipeDirection = 1;
+  }
+
+  if (Math.abs(deltaX) >= 30 && deltaY <= 100 && deltaTime <= 300) {
     isSwipe = true;
 
     setTimeout(() => {
