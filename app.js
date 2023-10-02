@@ -154,6 +154,7 @@ const scrollSensitivity = 50;
 
 let isScrolling = false;
 let isArrowPress = false;
+let isSwipe = false;
 
 /**Swipe */
 // document.addEventListener("touchstart", (event) => {
@@ -188,6 +189,28 @@ let isArrowPress = false;
 //   }
 // });
 
+const touchRegionElement = document.getElementById("touch-region");
+const outputElement = document.getElementById("output");
+
+let initialX, initialY, initialTime;
+
+touchRegionElement.addEventListener("touchstart", function (e) {
+  initialX = e.touches[0].clientX;
+  initialY = e.touches[0].clientY;
+  initialTime = new Date();
+});
+
+touchRegionElement.addEventListener("touchend", function (e) {
+  const deltaX = e.changedTouches[0].clientX - initialX;
+  const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
+  const deltaTime = new Date() - initialTime;
+
+  if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
+    setTimeout(() => {
+      isSwipe = false;
+    }, 500);
+  }
+});
 /**Arrows */
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {

@@ -218,11 +218,11 @@ canvas {
   height: 30%;
   width: 40%;
   transform: translateY(-20vh);
-  filter: saturate(60%);
+  filter: saturate(45%);
   background-color: #a9b4af;
   border: 0.5rem solid rgb(6, 6, 6);
-  box-shadow: 0.1vw 0.1vw 0.2vw #bebebe, -0.1vw 0.1vw 0.2vw #bebebe;
-  border-radius: 1.2rem;
+  box-shadow: 0.1vw 0.1vw 0.5vw #bebebe, -0.1vw 0.1vw 0.5vw #bebebe;
+  border-radius: 0.7rem;
 }
 @keyframes menuAnim {
   0% {
