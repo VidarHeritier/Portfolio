@@ -10,6 +10,8 @@ const hamburgerItems = document.querySelectorAll(".ham");
 const hamburgerItem1 = document.querySelector(".ham1");
 const hamburgerItem2 = document.querySelector(".ham2");
 const hamburgerItem3 = document.querySelector(".ham3");
+/**Empty page container */
+const empty = document.querySelector(".empty");
 /**Welcome page */
 const welcomePage = document.querySelector(".welcome-page");
 /**About page */
@@ -107,7 +109,7 @@ const showWelcomePage = (pageContent) => {
   restartAnimation(hamburgerItem3, "backIn .6s forwards");
   if (pageContent) {
     pageContent.style.visibility = "visible";
-    restartAnimation(aboutText, "unscramble 0.6s forwards");
+    restartAnimation("unscramble 0.6s forwards");
   }
 };
 
@@ -131,7 +133,9 @@ logo.addEventListener("mouseover", () => {
   );
 });
 
-logo.addEventListener("mouseout", resetLogo);
+logo.addEventListener("mouseout", () => {
+  resetLogo(logo);
+});
 
 logo.addEventListener("click", showWelcomePage);
 
@@ -157,10 +161,13 @@ let isArrowPress = false;
 let isSwipe = false;
 
 /**Swipe */
-let swipeDirection;
+let swipeDirection = 0;
+let initialX = null;
+let initialY = null;
+let initialTime = null;
 
 window.addEventListener("touchend", function (e) {
-  const deltaX = e.changedTouches[0].clientX - initialX;
+  const deltaX = Math.abs(e.changedTouches[0].clientX - initialX);
   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
   const deltaTime = new Date() - initialTime;
 
@@ -184,7 +191,20 @@ window.addEventListener("touchend", function (e) {
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
     if (!isArrowPress) {
-      handlePageChange(event.key === "ArrowUp" ? -1 : 1);
+      handlePageChange(event.key === "ArrowUp" > 0 ? -1 : 1);
+      isArrowPress = true;
+
+      setTimeout(() => {
+        isArrowPress = false;
+      }, 500);
+    }
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+    if (!isArrowPress) {
+      handlePageChange(event.key === "ArrowLeft" > 0 ? -1 : 1);
       isArrowPress = true;
 
       setTimeout(() => {
@@ -208,7 +228,7 @@ document.addEventListener("wheel", (event) => {
   }
 });
 /**Page change */
-function handlePageChange(direction) {
+function handlePageChange() {
   welcomePage.style.visibility = "hidden";
 
   pages[currentPageIndex].style.visibility = "hidden";
@@ -234,3 +254,13 @@ function handlePageChange(direction) {
   restartAnimation(hamburgerItem2, "");
   restartAnimation(hamburgerItem3, "");
 }
+
+/**Move elements into vieww element */
+//  moveIt = function () {
+//    outerDiv = document.querySelector(".view-element")[0].parentElement;
+//    innerDiv = document.querySelector(".view-element")[0];
+
+//   if (outerDiv.nextElementSibling != null) {
+//     outerDiv.nextElementSibling.appendChild(outerDiv.removeChild(innerDiv));
+//   }
+// };

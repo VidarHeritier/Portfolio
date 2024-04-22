@@ -224,6 +224,7 @@ canvas {
   box-shadow: 0.1vw 0.1vw 0.5vw #bebebe, -0.1vw 0.1vw 0.5vw #bebebe;
   border-radius: 0.7rem;
 }
+
 @keyframes menuAnim {
   0% {
     transform: scaleY(0.2);
@@ -263,6 +264,7 @@ canvas {
     scale: 1.35;
   }
 }
+
 @keyframes rotate {
   50% {
     transform: rotate(7deg);
