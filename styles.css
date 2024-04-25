@@ -161,7 +161,7 @@ canvas {
 .about-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-132vw);
+  transform: translateY(-120vw);
 }
 .about-text {
   width: 60%;
@@ -171,12 +171,12 @@ canvas {
 .project-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-160vw);
+  transform: translateY(-148vw);
 }
 .contact-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-161.7vw);
+  transform: translateY(-150vw);
 }
 .placeholder {
   text-align: center;
@@ -366,16 +366,16 @@ canvas {
     transform: translateY(-115vw);
   }
   .about-page {
-    transform: translateY(-230vw);
+    transform: translateY(-250vw);
     font-size: 3.3vw;
   }
   .project-page {
-    transform: translateY(-295vw);
+    transform: translateY(-355vw);
     font-size: 3.3vw;
   }
   .contact-page {
     font-size: 3.3vw;
-    transform: translateY(-297vw);
+    transform: translateY(-355vw);
   }
   .about-text {
     width: 85%;

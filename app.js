@@ -88,15 +88,6 @@ const showWelcomePage = (pageContent) => {
   welcomePage.style.visibility = "visible";
   welcomePage.style.animation = "fadeInText .3s ease-in";
 
-  [
-    aboutPage,
-    aboutText,
-    projectPage,
-    projectText,
-    contactText,
-    contactPage,
-  ].forEach((pages) => (pages.style.visibility = "hidden"));
-
   placeholder.textContent = "VirVar Vidar";
 
   restartAnimation(placeholder, "pageHeader 0.3s forwards");
@@ -150,21 +141,24 @@ prebensAssRay.forEach((ass, i) => {
   }
 });
 
-/**Cycle through pages on swipe, arrow press and scroll*/
 let currentPageIndex = 0;
 const pages = [aboutPage, projectPage, contactPage];
-
+let isOnLandingPage = true;
 const scrollSensitivity = 50;
 
 let isScrolling = false;
-let isArrowPress = false;
 let isSwipe = false;
 
-/**Swipe */
+/** Swipe Detection (combined with touch events) */
 let swipeDirection = 0;
 let initialX = null;
 let initialY = null;
-let initialTime = null;
+
+window.addEventListener("touchstart", function (e) {
+  initialX = e.changedTouches[0].clientX;
+  initialY = e.changedTouches[0].clientY;
+  initialTime = new Date();
+});
 
 window.addEventListener("touchend", function (e) {
   const deltaX = Math.abs(e.changedTouches[0].clientX - initialX);
@@ -172,9 +166,7 @@ window.addEventListener("touchend", function (e) {
   const deltaTime = new Date() - initialTime;
 
   if (deltaX >= 30 && deltaY <= 100 && deltaTime <= 300) {
-    swipeDirection = -1;
-  } else if (deltaX <= -30 && deltaY <= 100 && deltaTime <= 300) {
-    swipeDirection = 1;
+    swipeDirection = -1 * Math.sign(e.changedTouches[0].clientX - initialX);
   }
 
   if (Math.abs(deltaX) >= 30 && deltaY <= 100 && deltaTime <= 300) {
@@ -187,80 +179,52 @@ window.addEventListener("touchend", function (e) {
   }
 });
 
-/**Arrows */
+/** Scroll and Arrow Key Events with Spacebar */
+document.addEventListener("wheel", handlePageChange);
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-    if (!isArrowPress) {
-      handlePageChange(event.key === "ArrowUp" > 0 ? -1 : 1);
-      isArrowPress = true;
-
-      setTimeout(() => {
-        isArrowPress = false;
-      }, 500);
-    }
+  if (
+    event.key === "ArrowUp" ||
+    event.key === "ArrowDown" ||
+    event.key === " " ||
+    event.key === "ArrowLeft" ||
+    event.key === "ArrowRight"
+  ) {
+    handlePageChange(-1 * Math.sign(event.key.charCodeAt(0) - 38));
   }
 });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-    if (!isArrowPress) {
-      handlePageChange(event.key === "ArrowLeft" > 0 ? -1 : 1);
-      isArrowPress = true;
-
-      setTimeout(() => {
-        isArrowPress = false;
-      }, 500);
-    }
-  }
-});
-
-/**Scroll */
-document.addEventListener("wheel", (event) => {
-  const scrollDirection = event.deltaY > 0 ? 1 : -1;
-
-  if (Math.abs(event.deltaY) > scrollSensitivity && !isScrolling) {
-    handlePageChange(scrollDirection);
-    isScrolling = true;
-
-    setTimeout(() => {
-      isScrolling = false;
-    }, 500);
-  }
-});
 /**Page change */
-function handlePageChange() {
+function handlePageChange(event) {
+  if (isSwipe) return;
+
+  const deltaY = event.deltaY;
+  if (Math.abs(deltaY) > scrollSensitivity) {
+    handlePageChange(-1 * Math.sign(deltaY));
+  }
+
   welcomePage.style.visibility = "hidden";
 
   pages[currentPageIndex].style.visibility = "hidden";
 
   currentPageIndex =
-    (currentPageIndex + swipeDirection + pages.length) % pages.length;
+    (currentPageIndex + swipeDirection + pages.length + 1) % pages.length;
 
   pages[currentPageIndex].style.visibility = "visible";
 
   switch (currentPageIndex) {
-    case 0:
+    case 1:
       switchToPage(aboutPage, "Om", aboutText, "unscramble 0.6s forwards");
       break;
-    case 1:
+    case 2:
       switchToPage(projectPage, "Prosjekter", projectText);
       break;
-    case 2:
+    case 0:
       switchToPage(contactPage, "Kontakt", contactText);
       break;
   }
+
   hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
   restartAnimation(hamburgerItem1, "");
   restartAnimation(hamburgerItem2, "");
   restartAnimation(hamburgerItem3, "");
 }
-
-/**Move elements into vieww element */
-//  moveIt = function () {
-//    outerDiv = document.querySelector(".view-element")[0].parentElement;
-//    innerDiv = document.querySelector(".view-element")[0];
-
-//   if (outerDiv.nextElementSibling != null) {
-//     outerDiv.nextElementSibling.appendChild(outerDiv.removeChild(innerDiv));
-//   }
-// };
