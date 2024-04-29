@@ -2,6 +2,7 @@
 /** Menu*/
 const menu = document.querySelector("#menu-container");
 const menuItems = document.querySelectorAll(".menu");
+const menuItemsArray = Array.from(document.querySelectorAll(".menu"));
 /**Logo */
 const logo = document.querySelector("#logo");
 /**Hamburger */
@@ -49,11 +50,56 @@ const restartAnimation = (element, animationName) => {
 const showMenu = () => {
   hamburgerItems.forEach((element) => (element.style.visibility = "hidden"));
   menu.style.visibility = "visible";
-  menu.style.animation = "menuAnim .3s ease";
+  // menu.style.animation = "menuAnim .3s ease";
   menuItems.forEach((element) => (element.style.visibility = "visible"));
-  welcomePage.style.visibility = "hidden";
-  restartAnimation(menu, "menuAnim .3s ease");
+  welcomePage.style.animation = "scaleWelcome .3s ease-in forwards";
+  hamburger.style.cursor = "default";
+  // restartAnimation(menu, "menuAnim .3s ease");
 };
+
+//////////////////////////////
+
+const documentClickListener = (event) => {
+  if (
+    menuItemsArray.some((menuItem) => menuItem.style.visibility === "visible")
+  ) {
+    const isClickedInsideMenu =
+      menu.contains(event.target) || hamburger.contains(event.target);
+    if (isClickedInsideMenu) {
+      event.stopPropagation();
+      return;
+    }
+
+    menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
+
+    hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
+    restartAnimation(hamburgerItem1, "backIn .5s forwards");
+    restartAnimation(hamburgerItem2, "backIn2 .6s forwards");
+    restartAnimation(hamburgerItem3, "backIn .6s forwards");
+
+    welcomePage.style.animation = "rescaleWelcome .3s ease-in forwards";
+  }
+};
+
+// Add document click listener
+document.addEventListener("click", documentClickListener);
+
+////////////////////////
+
+aboutLink.addEventListener("click", () => {
+  welcomePage.style.visibility = "hidden";
+  hamburger.style.cursor = "pointer";
+});
+
+contactLink.addEventListener("click", () => {
+  welcomePage.style.visibility = "hidden";
+  hamburger.style.cursor = "pointer";
+});
+
+projectLink.addEventListener("click", () => {
+  welcomePage.style.visibility = "hidden";
+  hamburger.style.cursor = "pointer";
+});
 
 const switchToPage = (page, headerText, pageContent) => {
   const textElements = document.querySelectorAll(".text");
@@ -75,6 +121,8 @@ const switchToPage = (page, headerText, pageContent) => {
   if (pageContent) {
     pageContent.style.visibility = "visible";
     restartAnimation(aboutText, "unscramble 0.6s forwards");
+    restartAnimation(projectText, "fadeInText 0.2s forwards");
+    restartAnimation(contactText, "fadeInText 0.2s forwards");
   }
 };
 
@@ -108,7 +156,7 @@ hamburger.addEventListener("click", showMenu);
 
 /**Links to pages */
 aboutLink.addEventListener("click", () =>
-  switchToPage(aboutPage, "Om", aboutText, "unscramble 0.6s forwards")
+  switchToPage(aboutPage, "Om", aboutText)
 );
 projectLink.addEventListener("click", () =>
   switchToPage(projectPage, "Prosjekter", projectText)
@@ -120,15 +168,25 @@ contactLink.addEventListener("click", () =>
 logo.addEventListener("mouseover", () => {
   playAnimation(
     logo,
-    "spin 2s infinite linear, scale 0.5s ease-out forwards, rotate 2.2s ease"
+    "spin 2s infinite linear, scale 1s ease-out forwards, rotate 2.2s ease"
   );
 });
 
 logo.addEventListener("mouseout", () => {
-  resetLogo(logo);
+  if (isAnimationPlaying) {
+    setTimeout(() => {
+      logo.style.animation = "ease-out-spin 1s ease-out forwards";
+      isAnimationPlaying = false;
+    }, 500);
+  }
 });
 
-logo.addEventListener("click", showWelcomePage);
+logo.addEventListener("click", () => {
+  aboutText.style.visibility = "hidden";
+  projectText.style.visibility = "hidden";
+  contactText.style.visibility = "hidden";
+  showWelcomePage();
+});
 
 /**Span maker just for fun */
 const prebenStyle = document.querySelector("#preben");
@@ -144,7 +202,7 @@ prebensAssRay.forEach((ass, i) => {
 let currentPageIndex = 0;
 const pages = [aboutPage, projectPage, contactPage];
 let isOnLandingPage = true;
-const scrollSensitivity = 50;
+const scrollSensitivity = 500;
 
 let isScrolling = false;
 let isSwipe = false;
@@ -179,9 +237,13 @@ window.addEventListener("touchend", function (e) {
   }
 });
 
-/** Scroll and Arrow Key Events with Spacebar */
-document.addEventListener("wheel", handlePageChange);
+/** Arrow Key Events with Spacebar */
+
+let keyDown = false;
+
 document.addEventListener("keydown", (event) => {
+  if (keyDown) return;
+
   if (
     event.key === "ArrowUp" ||
     event.key === "ArrowDown" ||
@@ -189,42 +251,66 @@ document.addEventListener("keydown", (event) => {
     event.key === "ArrowLeft" ||
     event.key === "ArrowRight"
   ) {
+    keyDown = true;
     handlePageChange(-1 * Math.sign(event.key.charCodeAt(0) - 38));
+    event.preventDefault();
+  }
+});
+
+document.addEventListener("keyup", (event) => {
+  if (
+    event.key === "ArrowUp" ||
+    event.key === "ArrowDown" ||
+    event.key === " " ||
+    event.key === "ArrowLeft" ||
+    event.key === "ArrowRight"
+  ) {
+    keyDown = false;
   }
 });
 
 /**Page change */
+
+let lastCallTime = 0;
+const throttleDelay = 400;
+
 function handlePageChange(event) {
   if (isSwipe) return;
 
-  const deltaY = event.deltaY;
-  if (Math.abs(deltaY) > scrollSensitivity) {
-    handlePageChange(-1 * Math.sign(deltaY));
+  const now = Date.now();
+
+  if (now - lastCallTime >= throttleDelay) {
+    const deltaY = event.deltaY;
+    if (Math.abs(deltaY) > scrollSensitivity) {
+      handlePageChange(-1 * Math.sign(deltaY));
+    }
+    welcomePage.style.visibility = "hidden";
+
+    pages[currentPageIndex].style.visibility = "hidden";
+
+    currentPageIndex =
+      (currentPageIndex + swipeDirection + pages.length + 1) % pages.length;
+
+    pages[currentPageIndex].style.visibility = "visible";
+
+    switch (currentPageIndex) {
+      case 1:
+        switchToPage(aboutPage, "Om", aboutText);
+        break;
+      case 2:
+        switchToPage(projectPage, "Prosjekter", projectText);
+        break;
+      case 0:
+        switchToPage(contactPage, "Kontakt", contactText);
+        break;
+    }
+
+    hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
+    restartAnimation(hamburgerItem1, "");
+    restartAnimation(hamburgerItem2, "");
+    restartAnimation(hamburgerItem3, "");
+    lastCallTime = now;
   }
-
-  welcomePage.style.visibility = "hidden";
-
-  pages[currentPageIndex].style.visibility = "hidden";
-
-  currentPageIndex =
-    (currentPageIndex + swipeDirection + pages.length + 1) % pages.length;
-
-  pages[currentPageIndex].style.visibility = "visible";
-
-  switch (currentPageIndex) {
-    case 1:
-      switchToPage(aboutPage, "Om", aboutText, "unscramble 0.6s forwards");
-      break;
-    case 2:
-      switchToPage(projectPage, "Prosjekter", projectText);
-      break;
-    case 0:
-      switchToPage(contactPage, "Kontakt", contactText);
-      break;
-  }
-
-  hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
-  restartAnimation(hamburgerItem1, "");
-  restartAnimation(hamburgerItem2, "");
-  restartAnimation(hamburgerItem3, "");
 }
+
+document.addEventListener("wheel", handlePageChange);

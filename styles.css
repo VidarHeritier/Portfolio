@@ -235,6 +235,7 @@ canvas {
 @keyframes fadeInText {
   0% {
     opacity: 0;
+    transform: scaleY();
   }
   70% {
     opacity: 0;
@@ -260,8 +261,11 @@ canvas {
   }
 }
 @keyframes scale {
-  100% {
+  50% {
     scale: 1.35;
+  }
+  100% {
+    scale: 1;
   }
 }
 
@@ -273,6 +277,7 @@ canvas {
     transform: rotate(0deg);
   }
 }
+
 @keyframes spin {
   100% {
     filter: hue-rotate(360deg);
@@ -327,6 +332,7 @@ canvas {
     font-size: 2.5vw;
   }
 }
+
 @keyframes backIn {
   0% {
     transform: translateX(50vw);
@@ -343,7 +349,16 @@ canvas {
     transform: translateX(-3vw);
   }
 }
-
+@keyframes scaleWelcome {
+  100% {
+    scale: 0.9;
+  }
+}
+@keyframes rescaleWelcome {
+  100% {
+    scale: 1.001;
+  }
+}
 @media (orientation: portrait) {
   #logo {
     width: 15%;
