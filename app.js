@@ -23,6 +23,7 @@ const aboutText = document.querySelector(".about-text");
 const projectLink = document.querySelector(".menu2");
 const projectPage = document.querySelector(".project-page");
 const projectText = document.querySelector(".project-text");
+const projectImgs = document.querySelector(".project-imgs");
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
 const contactPage = document.querySelector(".contact-page");
@@ -47,10 +48,42 @@ const restartAnimation = (element, animationName) => {
   element.style.animation = animationName;
 };
 
+/**LOGO anim */
+logo.addEventListener("mouseover", () => {
+  playAnimation(
+    logo,
+    "spin 2s infinite linear, scale 1s ease-out forwards, rotate 2.2s ease"
+  );
+});
+
+logo.addEventListener("mouseout", () => {
+  if (isAnimationPlaying) {
+    setTimeout(() => {
+      logo.style.animation = "ease-out-spin 1s ease-out forwards";
+      isAnimationPlaying = false;
+    }, 500);
+  }
+});
+
+logo.addEventListener("click", () => {
+  aboutText.style.visibility = "hidden";
+  projectText.style.visibility = "hidden";
+  projectImgs.style.visibility = "hidden";
+  contactText.style.visibility = "hidden";
+  showWelcomePage();
+});
+/**Logo anim reset */
+const resetLogo = () => {
+  restartAnimation(logo, "spin 30s infinite linear");
+  logo.style.scale = "1";
+  isAnimationPlaying = false;
+};
+
+/**Hamburgermenu anim */
 const showMenu = () => {
   hamburgerItems.forEach((element) => (element.style.visibility = "hidden"));
   menu.style.visibility = "visible";
-  // menu.style.animation = "menuAnim .3s ease";
+
   menuItems.forEach((element) => (element.style.visibility = "visible"));
   if (window.matchMedia("(orientation: portrait)").matches) {
     welcomePage.style.animation = "portraitWelcome .3s ease-in forwards";
@@ -58,11 +91,9 @@ const showMenu = () => {
     welcomePage.style.animation = "scaleWelcome .3s ease-in forwards";
   }
   hamburger.style.cursor = "default";
-  // restartAnimation(menu, "menuAnim .3s ease");
 };
 
-//////////////////////////////
-
+/**Menu close when click detected outside */
 const documentClickListener = (event) => {
   if (
     menuItemsArray.some((menuItem) => menuItem.style.visibility === "visible")
@@ -78,6 +109,8 @@ const documentClickListener = (event) => {
 
     menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
 
+    hamburger.style.cursor = "pointer";
+
     hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
     restartAnimation(hamburgerItem1, "backIn .5s forwards");
     restartAnimation(hamburgerItem2, "backIn2 .6s forwards");
@@ -85,11 +118,9 @@ const documentClickListener = (event) => {
   }
 };
 
-// Add document click listener
 document.addEventListener("click", documentClickListener);
 
-////////////////////////
-
+/**Menu click events */
 aboutLink.addEventListener("click", () => {
   welcomePage.style.visibility = "hidden";
   hamburger.style.cursor = "pointer";
@@ -105,6 +136,7 @@ projectLink.addEventListener("click", () => {
   hamburger.style.cursor = "pointer";
 });
 
+/** Pages*/
 const switchToPage = (page, headerText, pageContent) => {
   const textElements = document.querySelectorAll(".text");
 
@@ -128,14 +160,15 @@ const switchToPage = (page, headerText, pageContent) => {
     restartAnimation(projectText, "fadeInText 0.2s forwards");
     restartAnimation(contactText, "fadeInText 0.2s forwards");
   }
+
+  if (pageContent === projectText) {
+    projectImgs.style.visibility = "visible";
+  } else {
+    projectImgs.style.visibility = "hidden";
+  }
 };
 
-const resetLogo = () => {
-  restartAnimation(logo, "spin 30s infinite linear");
-  logo.style.scale = "1";
-  isAnimationPlaying = false;
-};
-
+/**Show the welcome page */
 const showWelcomePage = (pageContent) => {
   welcomePage.style.visibility = "visible";
   welcomePage.style.animation = "fadeInText .3s ease-in";
@@ -156,6 +189,7 @@ const showWelcomePage = (pageContent) => {
   }
 };
 
+/**Open Menu click event */
 hamburger.addEventListener("click", showMenu);
 
 /**Links to pages */
@@ -168,29 +202,6 @@ projectLink.addEventListener("click", () =>
 contactLink.addEventListener("click", () =>
   switchToPage(contactPage, "Kontakt", contactText)
 );
-/**LOGO anim */
-logo.addEventListener("mouseover", () => {
-  playAnimation(
-    logo,
-    "spin 2s infinite linear, scale 1s ease-out forwards, rotate 2.2s ease"
-  );
-});
-
-logo.addEventListener("mouseout", () => {
-  if (isAnimationPlaying) {
-    setTimeout(() => {
-      logo.style.animation = "ease-out-spin 1s ease-out forwards";
-      isAnimationPlaying = false;
-    }, 500);
-  }
-});
-
-logo.addEventListener("click", () => {
-  aboutText.style.visibility = "hidden";
-  projectText.style.visibility = "hidden";
-  contactText.style.visibility = "hidden";
-  showWelcomePage();
-});
 
 /**Span maker just for fun */
 const prebenStyle = document.querySelector("#preben");
@@ -203,6 +214,7 @@ prebensAssRay.forEach((ass, i) => {
   }
 });
 
+/**Navigation querries */
 let currentPageIndex = 0;
 const pages = [aboutPage, projectPage, contactPage];
 let isOnLandingPage = true;
