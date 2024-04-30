@@ -52,7 +52,11 @@ const showMenu = () => {
   menu.style.visibility = "visible";
   // menu.style.animation = "menuAnim .3s ease";
   menuItems.forEach((element) => (element.style.visibility = "visible"));
-  welcomePage.style.animation = "scaleWelcome .3s ease-in forwards";
+  if (window.matchMedia("(orientation: portrait)").matches) {
+    welcomePage.style.animation = "portraitWelcome .3s ease-in forwards";
+  } else {
+    welcomePage.style.animation = "scaleWelcome .3s ease-in forwards";
+  }
   hamburger.style.cursor = "default";
   // restartAnimation(menu, "menuAnim .3s ease");
 };
@@ -70,14 +74,14 @@ const documentClickListener = (event) => {
       return;
     }
 
+    welcomePage.style.animation = "rescaleWelcome .3s ease-in forwards";
+
     menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
 
     hamburgerItems.forEach((element) => (element.style.visibility = "visible"));
     restartAnimation(hamburgerItem1, "backIn .5s forwards");
     restartAnimation(hamburgerItem2, "backIn2 .6s forwards");
     restartAnimation(hamburgerItem3, "backIn .6s forwards");
-
-    welcomePage.style.animation = "rescaleWelcome .3s ease-in forwards";
   }
 };
 
