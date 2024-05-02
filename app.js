@@ -24,6 +24,8 @@ const projectLink = document.querySelector(".menu2");
 const projectPage = document.querySelector(".project-page");
 const projectText = document.querySelector(".project-text");
 const projectImgs = document.querySelector(".project-imgs");
+const projectImgs2 = document.querySelector(".project-imgs2");
+const projectImgs3 = document.querySelector(".project-imgs3");
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
 const contactPage = document.querySelector(".contact-page");
@@ -163,10 +165,26 @@ const switchToPage = (page, headerText, pageContent) => {
 
   if (pageContent === projectText) {
     projectImgs.style.visibility = "visible";
+    projectImgs2.style.visibility = "visible";
+    projectImgs3.style.visibility = "visible";
   } else {
     projectImgs.style.visibility = "hidden";
+    projectImgs2.style.visibility = "hidden";
+    projectImgs3.style.visibility = "hidden";
   }
 };
+
+/**Project images anim */
+
+projectImgs2.addEventListener("mouseover", () => {
+  projectImgs2.style.animation = "hoverImgs .15s ease";
+  projectImgs2.style.cursor = "pointer";
+});
+
+projectImgs3.addEventListener("mouseover", () => {
+  projectImgs3.style.animation = "hoverImgs .15s ease";
+  projectImgs3.style.cursor = "pointer";
+});
 
 /**Show the welcome page */
 const showWelcomePage = (pageContent) => {
