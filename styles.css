@@ -12,6 +12,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  background-size: 100%;
   animation: pulsating 2s infinite;
   width: 100vw;
   height: 100vh;
@@ -122,6 +123,7 @@ canvas {
   flex-direction: row;
   justify-content: space-around;
   width: 100vw;
+  height: 100%;
 }
 #welcome {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -155,6 +157,7 @@ canvas {
   visibility: collapse;
   text-align: center;
   transform: translateY(-45vw);
+  height: 100%;
 }
 .about-text {
   width: 60%;
@@ -167,36 +170,25 @@ canvas {
   display: flex;
   flex-direction: column;
   transform: translateY(-73vw);
+  height: 100%;
+  width: 100%;
 }
-.project-imgs {
-  transform: translateY(8vw);
+.project-imgs1 {
+  transform: translateY(2vw);
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
-}
-.project-imgs2 {
-  transform: translateX(2vw) translateY(-18vw);
-  position: absolute;
-  z-index: -900;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  filter: opacity(30%) grayscale(5) brightness(60%) blur(0.1rem);
 }
 
-.project-imgs3 {
-  transform: translateX(30vw) translateY(-3vw);
-  position: absolute;
-  z-index: -800;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  filter: opacity(30%) grayscale(5) brightness(60%) blur(0.1rem);
+.project-all {
+  height: 100%;
+  width: 100%;
 }
 .project-all img {
-  height: 20rem;
-  width: auto;
-  margin: 0px 1rem 0px 1rem;
+  height: auto;
+  width: 16%;
+  margin: 1rem;
   border: 0.1rem solid rgb(16, 78, 70);
   border-radius: 0.3rem;
   box-shadow: 0rem 0rem 0.3rem rgba(244, 245, 224);
@@ -204,7 +196,8 @@ canvas {
 .contact-page {
   visibility: collapse;
   text-align: center;
-  transform: translateY(-90vw);
+  transform: translateY(-110vw);
+  height: 100%;
 }
 .placeholder {
   text-align: center;
@@ -260,9 +253,10 @@ canvas {
     opacity: 0.2;
   }
 }
-@keyframes hoverImgs {
+@keyframes menuHide {
   100% {
-    filter: opacity(60%) brightness(80%);
+    scale: 0.2;
+    opacity: 0.2;
   }
 }
 @keyframes fadeInText {
@@ -389,7 +383,7 @@ canvas {
 }
 @keyframes rescaleWelcome {
   100% {
-    scale: 1.001;
+    size: 100%;
   }
 }
 @keyframes portraitWelcome {

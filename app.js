@@ -23,9 +23,8 @@ const aboutText = document.querySelector(".about-text");
 const projectLink = document.querySelector(".menu2");
 const projectPage = document.querySelector(".project-page");
 const projectText = document.querySelector(".project-text");
-const projectImgs = document.querySelector(".project-imgs");
-const projectImgs2 = document.querySelector(".project-imgs2");
-const projectImgs3 = document.querySelector(".project-imgs3");
+const projectImgs1 = document.querySelector(".project-imgs1");
+
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
 const contactPage = document.querySelector(".contact-page");
@@ -70,7 +69,7 @@ logo.addEventListener("mouseout", () => {
 logo.addEventListener("click", () => {
   aboutText.style.visibility = "hidden";
   projectText.style.visibility = "hidden";
-  projectImgs.style.visibility = "hidden";
+  projectImgs1.style.visibility = "hidden";
   contactText.style.visibility = "hidden";
   showWelcomePage();
 });
@@ -86,7 +85,15 @@ const showMenu = () => {
   hamburgerItems.forEach((element) => (element.style.visibility = "hidden"));
   menu.style.visibility = "visible";
 
-  menuItems.forEach((element) => (element.style.visibility = "visible"));
+  menuItems.forEach((element) => {
+    element.style.visibility = "visible";
+    element.style.animation = "menuAnim .3s ease-in";
+
+    element.addEventListener("animationend", () => {
+      element.style.animation = "";
+    });
+  });
+
   if (window.matchMedia("(orientation: portrait)").matches) {
     welcomePage.style.animation = "portraitWelcome .3s ease-in forwards";
   } else {
@@ -107,9 +114,15 @@ const documentClickListener = (event) => {
       return;
     }
 
-    welcomePage.style.animation = "rescaleWelcome .3s ease-in forwards";
+    welcomePage.style.animation = "rescaleWelcome .3s ease-in";
 
-    menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
+    menuItems.forEach((menuItem) => {
+      menuItem.style.animation = "menuHide .3s ease-in forwards";
+    });
+
+    setTimeout(() => {
+      menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
+    }, 300);
 
     hamburger.style.cursor = "pointer";
 
@@ -164,27 +177,23 @@ const switchToPage = (page, headerText, pageContent) => {
   }
 
   if (pageContent === projectText) {
-    projectImgs.style.visibility = "visible";
-    projectImgs2.style.visibility = "visible";
-    projectImgs3.style.visibility = "visible";
+    projectImgs1.style.visibility = "visible";
   } else {
-    projectImgs.style.visibility = "hidden";
-    projectImgs2.style.visibility = "hidden";
-    projectImgs3.style.visibility = "hidden";
+    projectImgs1.style.visibility = "hidden";
   }
 };
 
 /**Project images anim */
 
-projectImgs2.addEventListener("mouseover", () => {
-  projectImgs2.style.animation = "hoverImgs .15s ease";
-  projectImgs2.style.cursor = "pointer";
-});
+// projectImgs2.addEventListener("mouseover", () => {
+//   projectImgs2.style.animation = "hoverImgs .15s forwards";
+//   projectImgs2.style.cursor = "pointer";
+// });
 
-projectImgs3.addEventListener("mouseover", () => {
-  projectImgs3.style.animation = "hoverImgs .15s ease";
-  projectImgs3.style.cursor = "pointer";
-});
+// projectImgs3.addEventListener("mouseover", () => {
+//   projectImgs3.style.animation = "hoverImgs .15s ease-in";
+//   projectImgs3.style.cursor = "pointer";
+// });
 
 /**Show the welcome page */
 const showWelcomePage = (pageContent) => {
