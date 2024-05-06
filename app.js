@@ -25,6 +25,25 @@ const projectPage = document.querySelector(".project-page");
 const projectText = document.querySelector(".project-text");
 const projectImgs1 = document.querySelector(".project-imgs1");
 
+/**Project images */
+const projects = [
+  {
+    src: "/Images/Trottier_M31SW_APOD_Re.jpg",
+    alt: "M31 Galaxy (Trottier, M31SW APOD Re)",
+    title: "M31 Galaxy",
+  },
+  {
+    src: "/Images/Uranus.jpg",
+    alt: "Planet Uranus",
+    title: "Uranus",
+  },
+  {
+    src: "/Images/Venus.jpeg",
+    alt: "Planet Venus",
+    title: "Venus",
+  },
+];
+
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
 const contactPage = document.querySelector(".contact-page");
@@ -114,7 +133,7 @@ const documentClickListener = (event) => {
       return;
     }
 
-    welcomePage.style.animation = "rescaleWelcome .3s ease-in";
+    welcomePage.style.animation = "rescaleWelcome .3s ease-in forwards";
 
     menuItems.forEach((menuItem) => {
       menuItem.style.animation = "menuHide .3s ease-in forwards";
@@ -172,8 +191,8 @@ const switchToPage = (page, headerText, pageContent) => {
   if (pageContent) {
     pageContent.style.visibility = "visible";
     restartAnimation(aboutText, "unscramble 0.6s forwards");
-    restartAnimation(projectText, "fadeInText 0.2s forwards");
-    restartAnimation(contactText, "fadeInText 0.2s forwards");
+    restartAnimation(projectText, "fadeInText 0.6s forwards");
+    restartAnimation(contactText, "fadeInText2 0.6s forwards");
   }
 
   if (pageContent === projectText) {
@@ -183,20 +202,48 @@ const switchToPage = (page, headerText, pageContent) => {
   }
 };
 
-/**Project images anim */
+/**Project handling */
 
-// projectImgs2.addEventListener("mouseover", () => {
-//   projectImgs2.style.animation = "hoverImgs .15s forwards";
-//   projectImgs2.style.cursor = "pointer";
-// });
+function enlargeImage(event) {
+  const clickedImg = event.target;
 
-// projectImgs3.addEventListener("mouseover", () => {
-//   projectImgs3.style.animation = "hoverImgs .15s ease-in";
-//   projectImgs3.style.cursor = "pointer";
-// });
+  const imageContainer = document.createElement("div");
+  imageContainer.classList.add("big-project");
+
+  const enlargedImg = clickedImg;
+  enlargedImg.src = clickedImg.src;
+  enlargedImg.style.scale = "2";
+
+  const imageText = document.createElement("p");
+  imageText.textContent = clickedImg.title;
+  imageText.classList.add("projectdesc");
+
+  imageContainer.appendChild(enlargedImg);
+  imageContainer.appendChild(imageText);
+
+  // projectImgs1.innerHTML = "";
+
+  projectImgs1.appendChild(imageContainer);
+
+  imageContainer.addEventListener("click", () => {
+    projectImgs1.removeChild(imageContainer);
+  });
+}
+
+// Loop through each project object in the array
+projects.forEach((project) => {
+  const img = document.createElement("img");
+  img.src = project.src;
+  img.alt = project.alt;
+  img.title = project.title;
+
+  img.addEventListener("click", enlargeImage);
+
+  projectImgs1.appendChild(img);
+});
 
 /**Show the welcome page */
-const showWelcomePage = (pageContent) => {
+function showWelcomePage(pageContent) {
   welcomePage.style.visibility = "visible";
   welcomePage.style.animation = "fadeInText .3s ease-in";
 
@@ -214,7 +261,7 @@ const showWelcomePage = (pageContent) => {
     pageContent.style.visibility = "visible";
     restartAnimation("unscramble 0.6s forwards");
   }
-};
+}
 
 /**Open Menu click event */
 hamburger.addEventListener("click", showMenu);
