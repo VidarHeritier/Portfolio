@@ -25,22 +25,28 @@ const projectPage = document.querySelector(".project-page");
 const projectText = document.querySelector(".project-text");
 const projectImgs1 = document.querySelector(".project-imgs1");
 
-/**Project images */
+/**Project images array */
 const projects = [
   {
+    key: 1,
     src: "/Images/Trottier_M31SW_APOD_Re.jpg",
     alt: "M31 Galaxy (Trottier, M31SW APOD Re)",
     title: "M31 Galaxy",
+    description: "dsjfdlj",
   },
   {
+    key: 2,
     src: "/Images/Uranus.jpg",
     alt: "Planet Uranus",
     title: "Uranus",
+    description: "fsfsdfd",
   },
   {
+    key: 3,
     src: "/Images/Venus.jpeg",
     alt: "Planet Venus",
     title: "Venus",
+    description: "sfsdffdsf",
   },
 ];
 
@@ -193,6 +199,7 @@ const switchToPage = (page, headerText, pageContent) => {
     restartAnimation(aboutText, "unscramble 0.6s forwards");
     restartAnimation(projectText, "fadeInText 0.6s forwards");
     restartAnimation(contactText, "fadeInText2 0.6s forwards");
+    restartAnimation(projectImgs1, "fadeInProjects 0.6s forwards");
   }
 
   if (pageContent === projectText) {
@@ -212,10 +219,10 @@ function enlargeImage(event) {
 
   const enlargedImg = clickedImg;
   enlargedImg.src = clickedImg.src;
-  enlargedImg.style.scale = "2";
+  enlargedImg.style.animation = "bigProj .3s ease-in forwards";
 
   const imageText = document.createElement("p");
-  imageText.textContent = clickedImg.title;
+  imageText.textContent = clickedImg.text;
   imageText.classList.add("projectdesc");
 
   imageContainer.appendChild(enlargedImg);
@@ -224,6 +231,8 @@ function enlargeImage(event) {
   // projectImgs1.innerHTML = "";
 
   projectImgs1.appendChild(imageContainer);
+
+  projectImgs1.style.animation = "fadeInProjects .3s ease-in forwards";
 
   imageContainer.addEventListener("click", () => {
     projectImgs1.removeChild(imageContainer);
@@ -271,7 +280,7 @@ aboutLink.addEventListener("click", () =>
   switchToPage(aboutPage, "Om", aboutText)
 );
 projectLink.addEventListener("click", () =>
-  switchToPage(projectPage, "Prosjekter", projectText)
+  switchToPage(projectPage, "Prosjekter", projectText, projectImgs1)
 );
 contactLink.addEventListener("click", () =>
   switchToPage(contactPage, "Kontakt", contactText)
@@ -388,7 +397,7 @@ function handlePageChange(event) {
         switchToPage(aboutPage, "Om", aboutText);
         break;
       case 2:
-        switchToPage(projectPage, "Prosjekter", projectText);
+        switchToPage(projectPage, "Prosjekter", projectText, projectImgs1);
         break;
       case 0:
         switchToPage(contactPage, "Kontakt", contactText);

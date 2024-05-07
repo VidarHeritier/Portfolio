@@ -197,6 +197,13 @@ canvas {
   border: 0.1rem solid rgb(16, 78, 70);
   border-radius: 0.3rem;
   box-shadow: 0rem 0rem 0.3rem rgba(244, 245, 224);
+  transition: transform 0.15s ease-in-out;
+}
+.project-all img:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  filter: brightness(110%) saturate(110%);
+  box-shadow: 0rem 0rem 0.6rem rgba(244, 245, 224);
 }
 .contact-page {
   visibility: collapse;
@@ -254,15 +261,49 @@ canvas {
   border-radius: 0.7rem;
 }
 .projectdesc {
-  background-color: #bebebe;
-  width: 20vw;
-  height: 4vh;
-  align-content: center;
+  background-color: #bebebe86;
+  backdrop-filter: blur(0.3rem);
+  box-shadow: -0.1vw -0.1vw 1vw #bebebe7b, 0.1vw 0.1vw 1vw #bebebe7b;
+  border-radius: 0 0 0.5rem 0.5rem;
+  width: 25vw;
+  height: 10vh;
+  position: relative;
+  transform: translateY(7vh);
+  z-index: -200;
+  font-size: 3vw;
+  color: #0c2218;
 }
 .big-project {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+}
+@keyframes bigProj {
+  100% {
+    scale: 2;
+  }
+}
+@keyframes fadeInProjects {
+  0% {
+    transform: translateY(50vh);
+    opacity: 0;
+    scale: 0.9;
+  }
+  70% {
+    transform: translateY(-3vh);
+  }
+  80% {
+    transform: translateY(0vh);
+  }
+  90% {
+    transform: translateY(-1vh);
+  }
+  100% {
+    transform: translateY(0vh);
+    opacity: 1;
+    scale: 1;
+  }
 }
 @keyframes menuAnim {
   0% {
