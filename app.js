@@ -197,7 +197,7 @@ const switchToPage = (page, headerText, pageContent) => {
   if (pageContent) {
     pageContent.style.visibility = "visible";
     restartAnimation(aboutText, "unscramble 0.6s forwards");
-    restartAnimation(projectText, "fadeInText 0.6s forwards");
+    restartAnimation(projectText, "fadeInText 1.8s forwards");
     restartAnimation(contactText, "fadeInText2 0.6s forwards");
     restartAnimation(projectImgs1, "fadeInProjects 0.6s forwards");
   }

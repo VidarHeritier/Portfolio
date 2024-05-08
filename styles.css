@@ -205,6 +205,7 @@ canvas {
   filter: brightness(110%) saturate(110%);
   box-shadow: 0rem 0rem 0.6rem rgba(244, 245, 224);
 }
+
 .contact-page {
   visibility: collapse;
   text-align: center;
@@ -279,9 +280,13 @@ canvas {
   align-items: center;
   position: absolute;
 }
+
 @keyframes bigProj {
   100% {
     scale: 2;
+    position: fixed;
+    top: 0;
+    left: 50%;
   }
 }
 @keyframes fadeInProjects {
@@ -325,8 +330,20 @@ canvas {
     transform: translateY(-10rem);
   }
 
-  100% {
+  35% {
     opacity: 1;
+    scale: 1;
+    transform: translateY(0rem);
+  }
+  80% {
+    opacity: 1;
+  }
+  85% {
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0;
   }
 }
 @keyframes unscramble {
