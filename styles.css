@@ -176,13 +176,13 @@ canvas {
   height: 100%;
   width: 100%;
 }
-/* .project-imgs1 {
+.project-imgs1 {
   transform: translateY(2vw);
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+
   justify-content: center;
-} */
+}
 .project-text {
   margin: 5vh;
 }
@@ -191,9 +191,9 @@ canvas {
   width: 100%;
 }
 .project-all img {
-  height: auto;
-  width: 16%;
-  margin: 2rem 6rem;
+  height: 20vh;
+  width: 20vw;
+  margin: 2rem 6rem -0.4rem 6rem;
   border: 0.1rem solid rgb(16, 78, 70);
   border-radius: 0.3rem;
   box-shadow: 0rem 0rem 0.3rem rgba(244, 245, 224);
@@ -266,27 +266,38 @@ canvas {
   backdrop-filter: blur(0.3rem);
   box-shadow: -0.1vw -0.1vw 1vw #bebebe7b, 0.1vw 0.1vw 1vw #bebebe7b;
   border-radius: 0 0 0.5rem 0.5rem;
-  width: 25vw;
-  height: 10vh;
+  padding: 1.7rem 0.8rem;
+  margin: 0 7.5rem;
   position: relative;
-  transform: translateY(7vh);
-  z-index: -200;
-  font-size: 3vw;
-  color: #0c2218;
-}
-.big-project {
-  display: flex;
-  flex-direction: column;
+  text-align: center;
   align-items: center;
-  position: absolute;
+  font-size: 1.5rem;
+  color: #0c2218;
+  visibility: hidden;
 }
 
 @keyframes bigProj {
+  0% {
+  }
   100% {
     scale: 2;
-    position: fixed;
-    top: 0;
-    left: 50%;
+    backdrop-filter: brightness(10%);
+    position: absolute;
+    align-items: center;
+  }
+}
+@keyframes bigProjDesc {
+  65% {
+    transform: scaleY(0);
+    transform: translateY(-7rem);
+  }
+  85% {
+    visibility: hidden;
+  }
+  100% {
+    transform: scaleY(1);
+    visibility: visible;
+    z-index: -990;
   }
 }
 @keyframes fadeInProjects {

@@ -28,21 +28,21 @@ const projectImgs1 = document.querySelector(".project-imgs1");
 /**Project images array */
 const projects = [
   {
-    key: 1,
+    key: "project1",
     src: "/Images/Trottier_M31SW_APOD_Re.jpg",
     alt: "M31 Galaxy (Trottier, M31SW APOD Re)",
     title: "M31 Galaxy",
     description: "dsjfdlj",
   },
   {
-    key: 2,
+    key: "project2",
     src: "/Images/Uranus.jpg",
     alt: "Planet Uranus",
     title: "Uranus",
     description: "fsfsdfd",
   },
   {
-    key: 3,
+    key: "project3",
     src: "/Images/Venus.jpeg",
     alt: "Planet Venus",
     title: "Venus",
@@ -202,53 +202,50 @@ const switchToPage = (page, headerText, pageContent) => {
     restartAnimation(projectImgs1, "fadeInProjects 0.6s forwards");
   }
 
-  if (pageContent === projectText) {
+  if (pageContent == projectText) {
     projectImgs1.style.visibility = "visible";
   } else {
     projectImgs1.style.visibility = "hidden";
   }
 };
 
-/**Project handling */
-
-function enlargeImage(event) {
-  const clickedImg = event.target;
-
-  const imageContainer = document.createElement("div");
-  imageContainer.classList.add("big-project");
-
-  const enlargedImg = clickedImg;
-  enlargedImg.src = clickedImg.src;
-  enlargedImg.style.animation = "bigProj .3s ease-in forwards";
-
-  const imageText = document.createElement("p");
-  imageText.textContent = clickedImg.text;
-  imageText.classList.add("projectdesc");
-
-  imageContainer.appendChild(enlargedImg);
-  imageContainer.appendChild(imageText);
-
-  // projectImgs1.innerHTML = "";
-
-  projectImgs1.appendChild(imageContainer);
-
-  projectImgs1.style.animation = "fadeInProjects .3s ease-in forwards";
-
-  imageContainer.addEventListener("click", () => {
-    projectImgs1.removeChild(imageContainer);
-  });
-}
-
 // Loop through each project object in the array
 projects.forEach((project) => {
   const img = document.createElement("img");
+  img.key = project.key;
   img.src = project.src;
   img.alt = project.alt;
   img.title = project.title;
+  img.description = project.description;
+  img.classList.add(img.key);
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("big-project");
+
+  const imageText = document.createElement("p");
+  imageText.textContent = project.description;
+  imageText.classList.add("projectdesc");
 
   img.addEventListener("click", enlargeImage);
 
-  projectImgs1.appendChild(img);
+  imgContainer.appendChild(img);
+  imgContainer.appendChild(imageText);
+  projectImgs1.appendChild(imgContainer);
+
+  projectImgs1.style.animation = "fadeInProjects .3s ease-in forwards";
+
+  /**Project handling */
+
+  function enlargeImage(event) {
+    const clickedImg = event.target;
+
+    imgContainer.style.animation = "bigProj 1.3s ease-in forwards";
+
+    imageText.style.animation = "bigProjDesc 2s ease-in forwards";
+
+    clickedImg.addEventListener("click", () => {
+      projectImgs1.removeChild(imgContainer);
+    });
+  }
 });
 
 /**Show the welcome page */
