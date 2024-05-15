@@ -1,4 +1,5 @@
 /**Querries */
+
 /** Menu*/
 const menu = document.querySelector("#menu-container");
 const menuItems = document.querySelectorAll(".menu");
@@ -24,6 +25,7 @@ const projectLink = document.querySelector(".menu2");
 const projectPage = document.querySelector(".project-page");
 const projectText = document.querySelector(".project-text");
 const projectImgs1 = document.querySelector(".project-imgs1");
+const projectDescription = document.querySelectorAll(".projectdesc");
 
 /**Project images array */
 const projects = [
@@ -96,6 +98,12 @@ logo.addEventListener("click", () => {
   projectText.style.visibility = "hidden";
   projectImgs1.style.visibility = "hidden";
   contactText.style.visibility = "hidden";
+
+  document.querySelectorAll(".projectdesc").forEach((text) => {
+    text.style.animation = "none";
+    text.style.visibility = "hidden";
+  });
+
   showWelcomePage();
 });
 /**Logo anim reset */
@@ -164,27 +172,104 @@ document.addEventListener("click", documentClickListener);
 aboutLink.addEventListener("click", () => {
   welcomePage.style.visibility = "hidden";
   hamburger.style.cursor = "pointer";
+
+  menuItems.forEach((menuItem) => {
+    menuItem.style.animation = "menuHide .3s ease-in forwards";
+  });
+  setTimeout(() => {
+    menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
+  }, 300);
 });
 
 contactLink.addEventListener("click", () => {
   welcomePage.style.visibility = "hidden";
   hamburger.style.cursor = "pointer";
+
+  menuItems.forEach((menuItem) => {
+    menuItem.style.animation = "menuHide .3s ease-in forwards";
+  });
+  setTimeout(() => {
+    menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
+  }, 300);
 });
 
 projectLink.addEventListener("click", () => {
   welcomePage.style.visibility = "hidden";
   hamburger.style.cursor = "pointer";
+
+  menuItems.forEach((menuItem) => {
+    menuItem.style.animation = "menuHide .3s ease-in forwards";
+  });
+  setTimeout(() => {
+    menuItems.forEach((menuItem) => (menuItem.style.visibility = "hidden"));
+  }, 300);
 });
 
 /** Pages*/
-const switchToPage = (page, headerText, pageContent) => {
-  const textElements = document.querySelectorAll(".text");
 
+function switchToPage(page, headerText, pageContent, projectImgs) {
+  const textElements = document.querySelectorAll(".text");
   textElements.forEach((text) => {
     text.style.visibility = "hidden";
   });
 
-  menuItems.forEach((element) => (element.style.visibility = "hidden"));
+  if (page === projectPage) {
+    projectImgs.querySelectorAll(".big-project").forEach((container) => {
+      container.style.animation = "";
+    });
+    projectImgs.innerHTML = "";
+    projects.forEach((project) => {
+      const img = document.createElement("img");
+      img.key = project.key;
+      img.src = project.src;
+      img.alt = project.alt;
+      img.title = project.title;
+      img.description = project.description;
+      img.classList.add(img.key);
+      const imgContainer = document.createElement("div");
+      imgContainer.classList.add("big-project");
+
+      const imageText = document.createElement("p");
+      imageText.textContent = project.description;
+      imageText.classList.add("projectdesc");
+
+      img.addEventListener("click", enlargeImage);
+
+      imgContainer.appendChild(img);
+      imgContainer.appendChild(imageText);
+      projectImgs.appendChild(imgContainer);
+
+      projectImgs.style.animation = "fadeInProjects .3s ease-in forwards";
+
+      /**Project handling */
+
+      function enlargeImage(event) {
+        const clickedImg = event.target;
+        const imgContainer = clickedImg.parentElement;
+
+        // Add individual animations for each image
+        clickedImg.style.animation = "bigProj 1.3s ease-in-out forwards";
+        imageText.style.animation = "bigProjDesc 2s ease-in forwards";
+
+        // Add click event listener to revert image back to original form when clicked outside
+        document.addEventListener("click", function revertToOriginalForm(e) {
+          if (!imgContainer.contains(e.target) && !hamburgerItems) {
+            clickedImg.style.animation = "bigProjRevert .5s ease-in forwards";
+
+            clickedImg.removeEventListener("click", revertToOriginalForm);
+          }
+        });
+
+        // Add click event listener to close other enlarged images when another image is clicked
+        projects.forEach((project) => {
+          const otherImg = document.querySelector(`.${project.key}`);
+          if (otherImg !== clickedImg && otherImg) {
+            otherImg.style.animation = "otherImgs .4s ease-in forwards";
+          }
+        });
+      }
+    });
+  }
 
   page.style.visibility = "visible";
   placeholder.textContent = headerText;
@@ -207,46 +292,7 @@ const switchToPage = (page, headerText, pageContent) => {
   } else {
     projectImgs1.style.visibility = "hidden";
   }
-};
-
-// Loop through each project object in the array
-projects.forEach((project) => {
-  const img = document.createElement("img");
-  img.key = project.key;
-  img.src = project.src;
-  img.alt = project.alt;
-  img.title = project.title;
-  img.description = project.description;
-  img.classList.add(img.key);
-  const imgContainer = document.createElement("div");
-  imgContainer.classList.add("big-project");
-
-  const imageText = document.createElement("p");
-  imageText.textContent = project.description;
-  imageText.classList.add("projectdesc");
-
-  img.addEventListener("click", enlargeImage);
-
-  imgContainer.appendChild(img);
-  imgContainer.appendChild(imageText);
-  projectImgs1.appendChild(imgContainer);
-
-  projectImgs1.style.animation = "fadeInProjects .3s ease-in forwards";
-
-  /**Project handling */
-
-  function enlargeImage(event) {
-    const clickedImg = event.target;
-
-    imgContainer.style.animation = "bigProj 1.3s ease-in forwards";
-
-    imageText.style.animation = "bigProjDesc 2s ease-in forwards";
-
-    clickedImg.addEventListener("click", () => {
-      projectImgs1.removeChild(imgContainer);
-    });
-  }
-});
+}
 
 /**Show the welcome page */
 function showWelcomePage(pageContent) {
@@ -380,7 +426,15 @@ function handlePageChange(event) {
     if (Math.abs(deltaY) > scrollSensitivity) {
       handlePageChange(-1 * Math.sign(deltaY));
     }
+
+    document.querySelectorAll(".projectdesc").forEach((text) => {
+      text.style.animation = "none";
+      text.style.visibility = "hidden";
+    });
+
     welcomePage.style.visibility = "hidden";
+
+    menuItems.forEach((element) => (element.style.visibility = "hidden"));
 
     pages[currentPageIndex].style.visibility = "hidden";
 

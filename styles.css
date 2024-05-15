@@ -171,24 +171,25 @@ canvas {
   text-align: center;
   display: flex;
   flex-direction: column;
+
   position: relative;
   position: absolute;
   height: 100%;
-  width: 100%;
+  width: 90%;
 }
 .project-imgs1 {
   transform: translateY(2vw);
   display: flex;
   flex-direction: row;
-
   justify-content: center;
 }
 .project-text {
   margin: 5vh;
+  padding-left: 17vh;
 }
 .project-all {
   height: 100%;
-  width: 100%;
+  width: 112%;
 }
 .project-all img {
   height: 20vh;
@@ -262,12 +263,12 @@ canvas {
   border-radius: 0.7rem;
 }
 .projectdesc {
-  background-color: #bebebe86;
-  backdrop-filter: blur(0.3rem);
+  background-color: #e9e8e840;
   box-shadow: -0.1vw -0.1vw 1vw #bebebe7b, 0.1vw 0.1vw 1vw #bebebe7b;
-  border-radius: 0 0 0.5rem 0.5rem;
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
   padding: 1.7rem 0.8rem;
-  margin: 0 7.5rem;
+  margin: 0 1.5rem;
+  backdrop-filter: blur(120px);
   position: relative;
   text-align: center;
   align-items: center;
@@ -277,27 +278,56 @@ canvas {
 }
 
 @keyframes bigProj {
+  100% {
+    scale: 1.9;
+    position: relative;
+    z-index: 999;
+  }
+}
+@keyframes bigProjRevert {
   0% {
+    scale: 1.9;
+  }
+  50% {
+    transform: scaleY(0.03);
+  }
+  60% {
+    scale: 0.8;
+    transform: scaleY(0.01);
+  }
+  70% {
+    transform: scaleY(0.03);
   }
   100% {
-    scale: 2;
-    backdrop-filter: brightness(10%);
-    position: absolute;
-    align-items: center;
+    scale: 1;
+    transform: scaleY(1);
   }
 }
 @keyframes bigProjDesc {
   65% {
     transform: scaleY(0);
-    transform: translateY(-7rem);
+    transform: translateY(0vh);
   }
   85% {
     visibility: hidden;
   }
   100% {
-    transform: scaleY(1);
+    transform: translateY(9vh);
     visibility: visible;
     z-index: -990;
+    backdrop-filter: blur(10px);
+  }
+}
+@keyframes otherImgs {
+  100% {
+    filter: brightness(20%);
+    scale: 0.5;
+  }
+}
+@keyframes otherImgsRevert {
+  100% {
+    filter: brightness(100%);
+    scale: 1;
   }
 }
 @keyframes fadeInProjects {
