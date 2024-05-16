@@ -340,6 +340,29 @@ prebensAssRay.forEach((ass, i) => {
   }
 });
 
+/**Track Page Change */
+
+function trackCurrentPage() {
+  const visiblePage = document.querySelector(
+    ".page-container[style*='visibility: visible']"
+  );
+  if (visiblePage) {
+    switch (visiblePage) {
+      case aboutPage:
+        currentPageIndex = 0;
+        break;
+      case projectPage:
+        currentPageIndex = 1;
+        break;
+      case contactPage:
+        currentPageIndex = 2;
+        break;
+      default:
+        currentPageIndex = -1;
+    }
+  }
+}
+
 /**Navigation querries */
 let currentPageIndex = 0;
 const pages = [aboutPage, projectPage, contactPage];
@@ -464,3 +487,5 @@ function handlePageChange(event) {
 }
 
 document.addEventListener("wheel", handlePageChange);
+
+document.addEventListener("DOMContentLoaded", trackCurrentPage);
