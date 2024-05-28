@@ -16,6 +16,7 @@ const hamburgerItem3 = document.querySelector(".ham3");
 const empty = document.querySelector(".empty");
 /**Welcome page */
 const welcomePage = document.querySelector(".welcome-page");
+
 /**About page */
 const aboutLink = document.querySelector(".menu1");
 const aboutPage = document.querySelector(".about-page");
@@ -26,6 +27,8 @@ const projectPage = document.querySelector(".project-page");
 const projectText = document.querySelector(".project-text");
 const projectImgs1 = document.querySelector(".project-imgs1");
 const projectDescription = document.querySelectorAll(".projectdesc");
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
 
 /**Project images array */
 const projects = [
@@ -50,7 +53,23 @@ const projects = [
     title: "Venus",
     description: "sfsdffdsf",
   },
+  {
+    key: "project4",
+    src: "/Images/Venus.jpeg",
+    alt: "Planet Venus",
+    title: "Venus",
+    description: "sfsdffdsf",
+  },
+  {
+    key: "project5",
+    src: "/Images/Venus.jpeg",
+    alt: "Planet Venus",
+    title: "Venus",
+    description: "sfsdffdsf",
+  },
 ];
+/** Check Mark */
+const checkMark = document.querySelector('img[src="/Images/check.svg"]');
 
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
@@ -126,11 +145,10 @@ const showMenu = () => {
       element.style.animation = "";
     });
   });
-
   if (window.matchMedia("(orientation: portrait)").matches) {
-    welcomePage.style.animation = "portraitWelcome .3s ease-in forwards";
+    welcome.style.animation = "portraitWelcome .3s ease-in forwards";
   } else {
-    welcomePage.style.animation = "scaleWelcome .3s ease-in forwards";
+    welcome.style.animation = "scaleWelcome .3s ease-in forwards";
   }
   hamburger.style.cursor = "default";
 };
@@ -205,19 +223,21 @@ projectLink.addEventListener("click", () => {
   }, 300);
 });
 
-/** Pages*/
+// /** Pages*/
 
-function switchToPage(page, headerText, pageContent, projectImgs) {
+let originalPosition = {};
+
+function switchToPage(page, headerText, pageContent) {
   const textElements = document.querySelectorAll(".text");
   textElements.forEach((text) => {
     text.style.visibility = "hidden";
   });
 
   if (page === projectPage) {
-    projectImgs.querySelectorAll(".big-project").forEach((container) => {
+    projectImgs1.querySelectorAll(".big-project").forEach((container) => {
       container.style.animation = "";
     });
-    projectImgs.innerHTML = "";
+    projectImgs1.innerHTML = "";
     projects.forEach((project) => {
       const img = document.createElement("img");
       img.key = project.key;
@@ -228,46 +248,18 @@ function switchToPage(page, headerText, pageContent, projectImgs) {
       img.classList.add(img.key);
       const imgContainer = document.createElement("div");
       imgContainer.classList.add("big-project");
+      imgContainer.addEventListener("click", openModal);
 
       const imageText = document.createElement("p");
       imageText.textContent = project.description;
       imageText.classList.add("projectdesc");
 
-      img.addEventListener("click", enlargeImage);
-
       imgContainer.appendChild(img);
       imgContainer.appendChild(imageText);
-      projectImgs.appendChild(imgContainer);
 
-      projectImgs.style.animation = "fadeInProjects .3s ease-in forwards";
+      projectImgs1.appendChild(imgContainer);
 
-      /**Project handling */
-
-      function enlargeImage(event) {
-        const clickedImg = event.target;
-        const imgContainer = clickedImg.parentElement;
-
-        // Add individual animations for each image
-        clickedImg.style.animation = "bigProj 1.3s ease-in-out forwards";
-        imageText.style.animation = "bigProjDesc 2s ease-in forwards";
-
-        // Add click event listener to revert image back to original form when clicked outside
-        document.addEventListener("click", function revertToOriginalForm(e) {
-          if (!imgContainer.contains(e.target) && !hamburgerItems) {
-            clickedImg.style.animation = "bigProjRevert .5s ease-in forwards";
-
-            clickedImg.removeEventListener("click", revertToOriginalForm);
-          }
-        });
-
-        // Add click event listener to close other enlarged images when another image is clicked
-        projects.forEach((project) => {
-          const otherImg = document.querySelector(`.${project.key}`);
-          if (otherImg !== clickedImg && otherImg) {
-            otherImg.style.animation = "otherImgs .4s ease-in forwards";
-          }
-        });
-      }
+      projectImgs1.style.animation = "fadeInProjects .3s ease-in forwards";
     });
   }
 
@@ -291,6 +283,114 @@ function switchToPage(page, headerText, pageContent, projectImgs) {
     projectImgs1.style.visibility = "visible";
   } else {
     projectImgs1.style.visibility = "hidden";
+  }
+}
+
+// Modal functions
+function openModal(event) {
+  const clickedImg = event.target;
+
+  if (clickedImg.tagName.toLowerCase() !== "img") {
+    return;
+  }
+
+  const modal = document.getElementById("modal");
+  const modalContent = document.querySelector(".modal-content");
+  const modalImg = document.getElementById("modal-img");
+  const modalDescription = document.getElementById("modal-description");
+  const projectImgs1 = document.querySelectorAll(".big-project");
+
+  // Set modal image and description
+  modalImg.src = clickedImg.src;
+  modalDescription.textContent = clickedImg.description;
+
+  // Calculate the position of the clicked image
+  const imgRect = clickedImg.getBoundingClientRect();
+
+  // Store the original position of the clicked image
+  originalPosition = {
+    top: imgRect.top,
+    left: imgRect.left,
+    width: imgRect.width,
+    height: imgRect.height,
+  };
+
+  // Set initial position of modal content to match clicked image
+  modalContent.style.top = `${imgRect.top}px`;
+  modalContent.style.left = `${imgRect.left}px`;
+  modalContent.style.width = `${imgRect.width}px`;
+  modalContent.style.height = `${imgRect.height}px`;
+  modalContent.style.transform = `translate(0, 0) scale(1)`;
+
+  // Show modal
+  modal.style.display = "block";
+
+  // Apply darken-desaturate class to all images except the clicked one
+  projectImgs1.forEach((container) => {
+    if (!container.contains(clickedImg)) {
+      container.classList.add("darken-desaturate");
+      clickedImg.classList.add("darken-desaturate");
+    }
+  });
+
+  // Calculate the center of the viewport
+  const viewportCenterX = window.innerWidth / 2;
+  const viewportCenterY = window.innerHeight / 2;
+
+  // Calculate the translation needed to center the image
+  const translateX = viewportCenterX - (imgRect.left + imgRect.width / 2);
+  const translateY = viewportCenterY - (imgRect.top + imgRect.height / 2);
+
+  // Animate modal content to the center of the screen
+  setTimeout(() => {
+    modalContent.style.transform = `translate(${translateX}px, ${translateY}px) scale(1.9)`;
+    modalDescription.style.animation = "bigProjDesc .7s ease-in forwards";
+    leftArrow.style.animation = "showArrows .8s ease-in forwards";
+    rightArrow.style.animation = "showArrows .8s ease-in forwards";
+  }, 10);
+
+  // Add event listeners for closing the modal
+  modal.addEventListener("click", closeModal);
+  document.addEventListener("click", closeModalOnOutsideClick);
+}
+
+function closeModal() {
+  const modal = document.getElementById("modal");
+  const modalContent = document.querySelector(".modal-content");
+  const modalDescription = document.getElementById("modal-description");
+  const projectImgs1 = document.querySelectorAll(".big-project");
+
+  // Animate modal content back to original size and position
+  modalContent.style.transform = `translate(0, 0) scale(1)`;
+  modalContent.style.top = `${originalPosition.top}px`;
+  modalContent.style.left = `${originalPosition.left}px`;
+  modalContent.style.width = `${originalPosition.width}px`;
+  modalContent.style.height = `${originalPosition.height}px`;
+  modalDescription.style.animation = "descRemove .15s ease-in forwards";
+  leftArrow.style.animation = "hideArrows .15s ease-in forwards";
+  rightArrow.style.animation = "hideArrows .15s ease-in forwards";
+  // Remove darken-desaturate class from all images
+  projectImgs1.forEach((container) => {
+    const clickedImg = event.target;
+    container.classList.remove("darken-desaturate");
+    clickedImg.classList.remove("darken-desaturate");
+  });
+
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 500);
+}
+
+function closeModalOnOutsideClick(event) {
+  const modal = document.getElementById("modal");
+  const modalContent = modal.querySelector(".modal-content");
+
+  if (
+    modal.style.display === "block" &&
+    !modalContent.contains(event.target) &&
+    !hamburgerItems.entries(event.target)
+  ) {
+    closeModal();
   }
 }
 
@@ -442,6 +542,10 @@ const throttleDelay = 400;
 function handlePageChange(event) {
   if (isSwipe) return;
 
+  const modal = document.getElementById("modal");
+
+  modal.style.display = "none";
+
   const now = Date.now();
 
   if (now - lastCallTime >= throttleDelay) {
@@ -460,11 +564,13 @@ function handlePageChange(event) {
     menuItems.forEach((element) => (element.style.visibility = "hidden"));
 
     pages[currentPageIndex].style.visibility = "hidden";
+    pages[currentPageIndex].style.zIndex = "700";
 
     currentPageIndex =
       (currentPageIndex + swipeDirection + pages.length + 1) % pages.length;
 
     pages[currentPageIndex].style.visibility = "visible";
+    pages[currentPageIndex].style.zIndex = "100";
 
     switch (currentPageIndex) {
       case 1:
