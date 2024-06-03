@@ -660,9 +660,38 @@ canvas {
   height: 100%;
   overflow: hidden; /* Hide scrollbars */
 }
-.darken-desaturate {
-  filter: brightness(20%) grayscale(100%);
-  transition: filter 0.3s;
+
+@keyframes darken-desaturate {
+  80% {
+    filter: brightness(20%) grayscale(100%) opacity(70%);
+  }
+  100% {
+    filter: brightness(20%) grayscale(100%) opacity(70%);
+    transform: scaleX(0);
+    backdrop-filter: brightness(20%);
+  }
+}
+@keyframes darken-desaturate-revert {
+  0% {
+    transform: scaleX(0);
+  }
+  80% {
+    filter: brightness(100%) grayscale(0%) opacity(100%);
+    transform: scaleX(0.01);
+  }
+  87% {
+    filter: brightness(1000%);
+  }
+  90% {
+    filter: brightness(1000%);
+  }
+  100% {
+    filter: brightness(100%) grayscale(0%) opacity(100%);
+    transform: scaleX(1);
+  }
+}
+.visibility {
+  visibility: hidden;
 }
 /* Modal content */
 .modal-content {
@@ -705,7 +734,6 @@ canvas {
 .left-arrow:hover {
   filter: brightness(150%)
     drop-shadow(0.3vw -0.3vw 0.15vw rgba(245, 245, 245, 0.301));
-
   /* background: linear-gradient(
     90deg,
     rgba(31, 148, 132, 0.3),

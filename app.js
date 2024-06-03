@@ -226,6 +226,7 @@ projectLink.addEventListener("click", () => {
 // /** Pages*/
 
 let originalPosition = {};
+let clickedImg = null; // Add a global variable to store the clicked image
 
 function switchToPage(page, headerText, pageContent) {
   const textElements = document.querySelectorAll(".text");
@@ -288,11 +289,13 @@ function switchToPage(page, headerText, pageContent) {
 
 // Modal functions
 function openModal(event) {
-  const clickedImg = event.target;
+  clickedImg = event.target; // Store the clicked image
 
   if (clickedImg.tagName.toLowerCase() !== "img") {
     return;
   }
+
+  clickedImg.classList.add("visibility");
 
   const modal = document.getElementById("modal");
   const modalContent = document.querySelector(".modal-content");
@@ -328,8 +331,7 @@ function openModal(event) {
   // Apply darken-desaturate class to all images except the clicked one
   projectImgs1.forEach((container) => {
     if (!container.contains(clickedImg)) {
-      container.classList.add("darken-desaturate");
-      clickedImg.classList.add("darken-desaturate");
+      container.style.animation = "darken-desaturate .4s ease-in forwards";
     }
   });
 
@@ -357,6 +359,7 @@ function openModal(event) {
 function closeModal() {
   const modal = document.getElementById("modal");
   const modalContent = document.querySelector(".modal-content");
+  const modalImg = document.getElementById("modal-img");
   const modalDescription = document.getElementById("modal-description");
   const projectImgs1 = document.querySelectorAll(".big-project");
 
@@ -371,10 +374,18 @@ function closeModal() {
   rightArrow.style.animation = "hideArrows .15s ease-in forwards";
   // Remove darken-desaturate class from all images
   projectImgs1.forEach((container) => {
-    const clickedImg = event.target;
-    container.classList.remove("darken-desaturate");
-    clickedImg.classList.remove("darken-desaturate");
+    setTimeout(() => {
+      container.style.animation =
+        "darken-desaturate-revert .4s ease-in forwards";
+    }, 250);
   });
+
+  // Remove visibility class from the clicked image
+  if (clickedImg) {
+    setTimeout(() => {
+      clickedImg.classList.remove("visibility");
+    }, 500);
+  }
 
   setTimeout(() => {
     modal.style.display = "none";
