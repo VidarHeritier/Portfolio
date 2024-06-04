@@ -164,6 +164,11 @@ canvas {
   position: relative;
   position: absolute;
   height: 100%;
+  background-image: linear-gradient(
+    rgba(33, 33, 33, 0.186),
+    rgba(33, 33, 33, 0.186),
+    rgba(0, 128, 92, 0.163)
+  );
 }
 .about-text {
   width: 60%;
@@ -380,8 +385,8 @@ canvas {
 }
 @keyframes menuAnim {
   0% {
-    transform: scaleY(0.2);
-    transform: scaleX(0.8);
+    transform: scaleY(0.2) scaleX(0.8);
+
     opacity: 0.2;
   }
 }
@@ -679,12 +684,7 @@ canvas {
     filter: brightness(100%) grayscale(0%) opacity(100%);
     transform: scaleX(0.01);
   }
-  87% {
-    filter: brightness(1000%);
-  }
-  90% {
-    filter: brightness(1000%);
-  }
+
   100% {
     filter: brightness(100%) grayscale(0%) opacity(100%);
     transform: scaleX(1);
@@ -782,4 +782,7 @@ canvas {
     rgb(0, 255, 242),
     rgba(31, 148, 132, 0.3)
   ); */
+}
+.arrows {
+  z-index: 999;
 }

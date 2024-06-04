@@ -12,8 +12,8 @@ const hamburgerItems = document.querySelectorAll(".ham");
 const hamburgerItem1 = document.querySelector(".ham1");
 const hamburgerItem2 = document.querySelector(".ham2");
 const hamburgerItem3 = document.querySelector(".ham3");
-/**Empty page container */
-const empty = document.querySelector(".empty");
+// /**Empty page container */
+// const empty = document.querySelector(".empty");
 /**Welcome page */
 const welcomePage = document.querySelector(".welcome-page");
 
@@ -29,6 +29,7 @@ const projectImgs1 = document.querySelector(".project-imgs1");
 const projectDescription = document.querySelectorAll(".projectdesc");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
+const arrows = document.querySelectorAll(".arrows");
 
 /**Project images array */
 const projects = [
@@ -68,8 +69,8 @@ const projects = [
     description: "sfsdffdsf",
   },
 ];
-/** Check Mark */
-const checkMark = document.querySelector('img[src="/Images/check.svg"]');
+// /** Check Mark */
+// const checkMark = document.querySelector('img[src="/Images/check.svg"]');
 
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
@@ -257,7 +258,6 @@ function switchToPage(page, headerText, pageContent) {
 
       imgContainer.appendChild(img);
       imgContainer.appendChild(imageText);
-
       projectImgs1.appendChild(imgContainer);
 
       projectImgs1.style.animation = "fadeInProjects .3s ease-in forwards";
@@ -359,7 +359,6 @@ function openModal(event) {
 function closeModal() {
   const modal = document.getElementById("modal");
   const modalContent = document.querySelector(".modal-content");
-  const modalImg = document.getElementById("modal-img");
   const modalDescription = document.getElementById("modal-description");
   const projectImgs1 = document.querySelectorAll(".big-project");
 
@@ -393,17 +392,22 @@ function closeModal() {
 }
 
 function closeModalOnOutsideClick(event) {
-  const modal = document.getElementById("modal");
-  const modalContent = modal.querySelector(".modal-content");
+  const modalContent = document.querySelector(".modal-content");
 
   if (
-    modal.style.display === "block" &&
-    !modalContent.contains(event.target) &&
+    modalContent.style.display === "block" &&
+    !arrows.entries(event.target) &&
     !hamburgerItems.entries(event.target)
   ) {
     closeModal();
   }
 }
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
 
 /**Show the welcome page */
 function showWelcomePage(pageContent) {
@@ -586,12 +590,27 @@ function handlePageChange(event) {
     switch (currentPageIndex) {
       case 1:
         switchToPage(aboutPage, "Om", aboutText);
+        aboutPage.style.backgroundImage = `linear-gradient(
+    rgba(33, 33, 33, 0.186),
+    rgba(33, 33, 33, 0.186),
+    rgba(0, 128, 92, 0.163)
+)`;
         break;
       case 2:
         switchToPage(projectPage, "Prosjekter", projectText, projectImgs1);
+        aboutPage.style.backgroundImage = `linear-gradient(
+    rgba(33, 33, 33, 0.186),
+    rgba(33, 33, 33, 0.186),
+    rgba(128, 130, 0, 0.163)
+)`;
         break;
       case 0:
         switchToPage(contactPage, "Kontakt", contactText);
+        aboutPage.style.backgroundImage = `linear-gradient(
+    rgba(33, 33, 33, 0.186),
+    rgba(33, 33, 33, 0.186),
+    rgba(128, 0, 107, 0.163)
+)`;
         break;
     }
 
