@@ -59,14 +59,14 @@ const projects = [
     src: "/Images/Venus.jpeg",
     alt: "Planet Venus",
     title: "Venus",
-    description: "sfsdffdsf",
+    description: "Dette er et annet bilde altså",
   },
   {
     key: "project5",
     src: "/Images/Venus.jpeg",
     alt: "Planet Venus",
     title: "Venus",
-    description: "sfsdffdsf",
+    description: "Dette",
   },
 ];
 // /** Check Mark */
@@ -118,6 +118,11 @@ logo.addEventListener("click", () => {
   projectText.style.visibility = "hidden";
   projectImgs1.style.visibility = "hidden";
   contactText.style.visibility = "hidden";
+  aboutPage.style.backgroundImage = `linear-gradient(
+    rgba(33, 33, 33, 0),
+    rgba(33, 33, 33, 0),
+    rgba(128, 130, 0, 0)
+)`;
 
   document.querySelectorAll(".projectdesc").forEach((text) => {
     text.style.animation = "none";
@@ -166,7 +171,7 @@ const documentClickListener = (event) => {
       return;
     }
 
-    welcomePage.style.animation = "rescaleWelcome .3s ease-in forwards";
+    welcomePage.style.animation = "";
 
     menuItems.forEach((menuItem) => {
       menuItem.style.animation = "menuHide .3s ease-in forwards";
@@ -191,6 +196,11 @@ document.addEventListener("click", documentClickListener);
 aboutLink.addEventListener("click", () => {
   welcomePage.style.visibility = "hidden";
   hamburger.style.cursor = "pointer";
+  aboutPage.style.backgroundImage = `linear-gradient(
+    rgba(33, 33, 33, 0.186),
+    rgba(33, 33, 33, 0.186),
+    rgba(0, 128, 92, 0.163)
+)`;
 
   menuItems.forEach((menuItem) => {
     menuItem.style.animation = "menuHide .3s ease-in forwards";
@@ -203,6 +213,11 @@ aboutLink.addEventListener("click", () => {
 contactLink.addEventListener("click", () => {
   welcomePage.style.visibility = "hidden";
   hamburger.style.cursor = "pointer";
+  aboutPage.style.backgroundImage = `linear-gradient(
+    rgba(33, 33, 33, 0.186),
+    rgba(33, 33, 33, 0.186),
+    rgba(128, 0, 90, 0.163)
+)`;
 
   menuItems.forEach((menuItem) => {
     menuItem.style.animation = "menuHide .3s ease-in forwards";
@@ -215,6 +230,11 @@ contactLink.addEventListener("click", () => {
 projectLink.addEventListener("click", () => {
   welcomePage.style.visibility = "hidden";
   hamburger.style.cursor = "pointer";
+  aboutPage.style.backgroundImage = `linear-gradient(
+    rgba(33, 33, 33, 0.186),
+    rgba(33, 33, 33, 0.186),
+    rgba(128, 130, 0, 0.163)
+)`;
 
   menuItems.forEach((menuItem) => {
     menuItem.style.animation = "menuHide .3s ease-in forwards";
@@ -287,6 +307,39 @@ function switchToPage(page, headerText, pageContent) {
   }
 }
 
+// Modal looping
+
+let currentProjectIndex = 0;
+
+const updateModalContent = () => {
+  const project = projects[currentProjectIndex];
+  const modalImg = document.getElementById("modal-img");
+  const modalDescription = document.getElementById("modal-description");
+  modalImg.src = project.src;
+  modalDescription.textContent = project.description;
+};
+
+const showNextProject = () => {
+  currentProjectIndex = (currentProjectIndex + 1) % projects.length;
+  updateModalContent();
+};
+
+const showPreviousProject = () => {
+  currentProjectIndex =
+    (currentProjectIndex - 1 + projects.length) % projects.length;
+  updateModalContent();
+};
+
+leftArrow.addEventListener("click", (event) => {
+  event.stopPropagation(); // Prevent the click from closing the modal
+  showPreviousProject();
+});
+
+rightArrow.addEventListener("click", (event) => {
+  event.stopPropagation(); // Prevent the click from closing the modal
+  showNextProject();
+});
+
 // Modal functions
 function openModal(event) {
   clickedImg = event.target; // Store the clicked image
@@ -302,6 +355,9 @@ function openModal(event) {
   const modalImg = document.getElementById("modal-img");
   const modalDescription = document.getElementById("modal-description");
   const projectImgs1 = document.querySelectorAll(".big-project");
+
+  const project = projects.find((p) => p.src === clickedImg.src);
+  currentProjectIndex = projects.indexOf(project);
 
   // Set modal image and description
   modalImg.src = clickedImg.src;
@@ -437,8 +493,10 @@ hamburger.addEventListener("click", showMenu);
 aboutLink.addEventListener("click", () =>
   switchToPage(aboutPage, "Om", aboutText)
 );
-projectLink.addEventListener("click", () =>
-  switchToPage(projectPage, "Prosjekter", projectText, projectImgs1)
+projectLink.addEventListener(
+  "click",
+  () => switchToPage(projectPage, "Prosjekter", projectText, projectImgs1),
+  closeModal()
 );
 contactLink.addEventListener("click", () =>
   switchToPage(contactPage, "Kontakt", contactText)
@@ -609,7 +667,7 @@ function handlePageChange(event) {
         aboutPage.style.backgroundImage = `linear-gradient(
     rgba(33, 33, 33, 0.186),
     rgba(33, 33, 33, 0.186),
-    rgba(128, 0, 107, 0.163)
+    rgba(128, 0, 90, 0.163)
 )`;
         break;
     }

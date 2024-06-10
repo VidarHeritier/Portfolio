@@ -84,6 +84,8 @@ canvas {
   padding: 0;
   background: linear-gradient(rgb(44, 44, 44, 0.8), rgb(60, 60, 60, 0.8));
   visibility: hidden;
+  animation: placeMenu 0.1s forwards;
+  opacity: 0;
 }
 .menu:hover {
   filter: brightness(200%);
@@ -95,13 +97,13 @@ canvas {
 .menu1 {
   max-height: 2vw;
   padding: 0.2vw;
-  animation: expandMenuItem1 1s forwards;
+  animation: expandMenuItem1 0.6s forwards;
   clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
 }
 .menu2 {
   max-height: 2vw;
   padding: 0.2vw;
-  animation: expandMenuItem2 1s forwards;
+  animation: expandMenuItem2 0.8s forwards;
   clip-path: polygon(10% 0, 90% 0, 80% 100%, 20% 100%);
 }
 .menu3 {
@@ -270,7 +272,7 @@ canvas {
 .vidar {
   height: 90%;
   width: 40%;
-  transform: translateY(-18vh);
+  transform: translateY(-22vh);
   filter: saturate(45%);
   background-color: #0c2218;
   border: 0.5rem solid rgb(6, 6, 6);
@@ -290,6 +292,9 @@ canvas {
   font-size: 1.5rem;
   color: #0c2218;
   visibility: hidden;
+}
+#modal-description {
+  width: 90%;
 }
 @keyframes bigProjMove {
   100% {
@@ -494,11 +499,18 @@ canvas {
     top: 9.4vw;
   }
 }
+@keyframes placeMenu {
+  100% {
+    opacity: 1;
+  }
+}
 @keyframes expandMenuItem1 {
   0% {
     border-radius: 0;
     width: 100vw;
+    opacity: 0;
   }
+
   100% {
     border-radius: 0;
     width: 100vw;
@@ -511,6 +523,7 @@ canvas {
   0% {
     border-radius: 0;
     width: 100vw;
+    opacity: 0;
   }
 
   100% {
@@ -526,6 +539,7 @@ canvas {
   0% {
     border-radius: 0;
     width: 100vw;
+    opacity: 0;
   }
 
   100% {
@@ -557,6 +571,7 @@ canvas {
 @keyframes scaleWelcome {
   100% {
     scale: 0.9;
+    transform: translateY(3vh);
   }
 }
 @keyframes rescaleWelcome {
