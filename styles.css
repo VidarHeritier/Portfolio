@@ -730,31 +730,21 @@ canvas {
   border-radius: 0rem 0rem 0.5rem 0.5rem;
   padding: 1.7rem 3.8rem;
   text-align: center;
+  font-size: 0.9rem;
 }
 
 .left-arrow {
   width: 0.5vw;
   height: 10vh;
-  /* background: linear-gradient(
-    90deg,
-    rgba(190, 190, 190, 0.1),
-    rgba(255, 255, 255, 0)
-  ); */
+
   transition: filter 0.4s ease-in;
   margin-right: 5vw;
-  /* position: absolute;
-  z-index: 885; */
+
   cursor: pointer;
 }
 .left-arrow:hover {
   filter: brightness(150%)
     drop-shadow(0.3vw -0.3vw 0.15vw rgba(245, 245, 245, 0.301));
-  /* background: linear-gradient(
-    90deg,
-    rgba(31, 148, 132, 0.3),
-    rgb(0, 255, 242),
-    rgba(31, 148, 132, 0.3)
-  ); */
 }
 .left-arrow-style {
   width: 4vw;
@@ -768,11 +758,6 @@ canvas {
 .right-arrow {
   width: 0.5vw;
   height: 10vh;
-  /* background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0),
-    rgba(190, 190, 190, 0.1)
-  ); */
 
   transition: filter 0.4s ease-in;
   margin-left: 5vw;
@@ -791,12 +776,6 @@ canvas {
 .right-arrow:hover {
   filter: brightness(150%)
     drop-shadow(0.3vw -0.3vw 0.15vw rgba(245, 245, 245, 0.301));
-  /* background: linear-gradient(
-    90deg,
-    rgba(31, 148, 132, 0.3),
-    rgb(0, 255, 242),
-    rgba(31, 148, 132, 0.3)
-  ); */
 }
 .arrows {
   z-index: 999;
