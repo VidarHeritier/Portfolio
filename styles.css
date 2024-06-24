@@ -801,3 +801,6 @@ canvas {
 .arrows {
   z-index: 999;
 }
+.arrows:active {
+  filter: hue-rotate(350deg);
+}
