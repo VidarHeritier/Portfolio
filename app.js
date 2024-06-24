@@ -35,38 +35,43 @@ const arrows = document.querySelectorAll(".arrows");
 const projects = [
   {
     key: "project1",
-    src: "/Images/Trottier_M31SW_APOD_Re.jpg",
+    src: "./Images/Trottier_M31SW_APOD_Re.jpg",
     alt: "M31 Galaxy (Trottier, M31SW APOD Re)",
     title: "M31 Galaxy",
     description: "dsjfdlj",
+    id: 1,
   },
   {
     key: "project2",
-    src: "/Images/Uranus.jpg",
+    src: "./Images/Uranus.jpg",
     alt: "Planet Uranus",
     title: "Uranus",
     description: "fsfsdfd",
+    id: 2,
   },
   {
     key: "project3",
-    src: "/Images/Venus.jpeg",
+    src: "./Images/Venus.jpeg",
     alt: "Planet Venus",
     title: "Venus",
     description: "sfsdffdsf",
+    id: 3,
   },
   {
     key: "project4",
-    src: "/Images/Venus.jpeg",
+    src: "https://media.istockphoto.com/id/692849276/photo/north-europe-elements-of-this-image-furnished-by-nasa.jpg?s=2048x2048&w=is&k=20&c=eSRwI6bcXxVL90WcXvTadmdXKvKkAb12W9W3dnT8obE=",
     alt: "Planet Venus",
     title: "Venus",
     description: "Dette er et annet bilde altså",
+    id: 4,
   },
   {
     key: "project5",
-    src: "/Images/Venus.jpeg",
+    src: "https://media.istockphoto.com/id/1457723433/photo/astronaut-on-alien-planet-entering-spacetime-portal-light.jpg?s=2048x2048&w=is&k=20&c=3XE6n7RG2dDsDY6CdklPPfS6zEyHj5yrIy-EjgbJD0E=",
     alt: "Planet Venus",
     title: "Venus",
     description: "Dette",
+    id: 5,
   },
 ];
 // /** Check Mark */
@@ -247,7 +252,7 @@ projectLink.addEventListener("click", () => {
 // /** Pages*/
 
 let originalPosition = {};
-let clickedImg = null; // Add a global variable to store the clicked image
+let clickedImg = null;
 
 function switchToPage(page, headerText, pageContent) {
   const textElements = document.querySelectorAll(".text");
@@ -331,18 +336,18 @@ const showPreviousProject = () => {
 };
 
 leftArrow.addEventListener("click", (event) => {
-  event.stopPropagation(); // Prevent the click from closing the modal
+  event.stopPropagation();
   showPreviousProject();
 });
 
 rightArrow.addEventListener("click", (event) => {
-  event.stopPropagation(); // Prevent the click from closing the modal
+  event.stopPropagation();
   showNextProject();
 });
 
 // Modal functions
 function openModal(event) {
-  clickedImg = event.target; // Store the clicked image
+  clickedImg = event.target;
 
   if (clickedImg.tagName.toLowerCase() !== "img") {
     return;
@@ -464,6 +469,8 @@ document.addEventListener("keydown", (event) => {
     closeModal();
   }
 });
+
+// Break
 
 /**Show the welcome page */
 function showWelcomePage(pageContent) {
