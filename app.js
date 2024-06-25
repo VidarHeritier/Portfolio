@@ -35,42 +35,45 @@ const arrows = document.querySelectorAll(".arrows");
 const projects = [
   {
     key: "project1",
-    src: "./Images/Trottier_M31SW_APOD_Re.jpg",
-    alt: "M31 Galaxy (Trottier, M31SW APOD Re)",
-    title: "M31 Galaxy",
-    description: "dsjfdlj",
+    src: "https://i.ibb.co/37xpWFW/Screenshot-2024-06-25-at-14-43-27.png",
+    alt: "Drum simulator",
+    title: "Find your inner funky cat",
+    description:
+      "A stylish drum machine, where you can play drums to three different songs",
     id: 1,
   },
   {
     key: "project2",
-    src: "./Images/Uranus.jpg",
-    alt: "Planet Uranus",
-    title: "Uranus",
-    description: "fsfsdfd",
+    src: "https://i.ibb.co/hD5FLWc/Screenshot-2024-06-25-at-14-53-48.png",
+    alt: "What would you weight on different celestial bodies",
+    title: "Weight converter",
+    description:
+      "Type a weight in and find out what it amounts to on different celestial bodies",
     id: 2,
   },
   {
     key: "project3",
-    src: "./Images/Venus.jpeg",
-    alt: "Planet Venus",
-    title: "Venus",
-    description: "sfsdffdsf",
+    src: "https://i.ibb.co/9VgTZnN/Screenshot-2024-06-25-at-14-57-51.png",
+    alt: "My personal art portfolio",
+    title: "Art portfolio",
+    description: "I made this site to display my art",
     id: 3,
   },
   {
     key: "project4",
-    src: "https://media.istockphoto.com/id/692849276/photo/north-europe-elements-of-this-image-furnished-by-nasa.jpg?s=2048x2048&w=is&k=20&c=eSRwI6bcXxVL90WcXvTadmdXKvKkAb12W9W3dnT8obE=",
-    alt: "Planet Venus",
-    title: "Venus",
-    description: "Dette er et annet bilde altså",
+    src: "https://i.ibb.co/bgKJPtp/Screenshot-2024-06-25-at-15-01-18.png",
+    alt: "Password generator themed after the movie the Matrix",
+    title: "Password generator",
+    description:
+      "A simple password generator themed after the movie the Matrix",
     id: 4,
   },
   {
     key: "project5",
-    src: "https://media.istockphoto.com/id/1457723433/photo/astronaut-on-alien-planet-entering-spacetime-portal-light.jpg?s=2048x2048&w=is&k=20&c=3XE6n7RG2dDsDY6CdklPPfS6zEyHj5yrIy-EjgbJD0E=",
-    alt: "Planet Venus",
-    title: "Venus",
-    description: "Dette",
+    src: "https://i.ibb.co/wLjBj38/Screenshot-2024-06-25-at-15-07-29.png",
+    alt: "A note taking site, where your notes are clouds",
+    title: "Cloudea! Ideas in the cloud",
+    description: "A note taking site where you put your ideas in the clouds",
     id: 5,
   },
 ];
@@ -278,8 +281,6 @@ function switchToPage(page, headerText, pageContent) {
       imgContainer.addEventListener("click", openModal);
 
       const imageText = document.createElement("p");
-      imageText.textContent = project.description;
-      imageText.classList.add("projectdesc");
 
       imgContainer.appendChild(img);
       imgContainer.appendChild(imageText);
@@ -315,6 +316,32 @@ function switchToPage(page, headerText, pageContent) {
 // Modal looping
 
 let currentProjectIndex = 0;
+
+const setOriginalPosition = () => {
+  const modalImg = document.getElementById("modal-img");
+  const currentProject = projects[currentProjectIndex];
+  const imgElement = document.querySelector(`img[src="${currentProject.src}"]`);
+
+  if (imgElement) {
+    const imgRect = imgElement.getBoundingClientRect();
+
+    // Update originalPosition with the new coordinates of the imgElement
+    originalPosition = {
+      top: imgRect.top,
+      left: imgRect.left,
+      width: imgRect.width,
+      height: imgRect.height,
+    };
+
+    // Update modal content position
+    const modalContent = document.querySelector(".modal-content");
+    modalContent.style.transform = `translate(0, 0) scale(1)`;
+    modalContent.style.top = `${originalPosition.top}px`;
+    modalContent.style.left = `${originalPosition.left}px`;
+    modalContent.style.width = `${originalPosition.width}px`;
+    modalContent.style.height = `${originalPosition.height}px`;
+  }
+};
 
 const updateModalContent = () => {
   const project = projects[currentProjectIndex];
@@ -424,11 +451,8 @@ function closeModal() {
   const projectImgs1 = document.querySelectorAll(".big-project");
 
   // Animate modal content back to original size and position
-  modalContent.style.transform = `translate(0, 0) scale(1)`;
-  modalContent.style.top = `${originalPosition.top}px`;
-  modalContent.style.left = `${originalPosition.left}px`;
-  modalContent.style.width = `${originalPosition.width}px`;
-  modalContent.style.height = `${originalPosition.height}px`;
+
+  setOriginalPosition();
   modalDescription.style.animation = "descRemove .15s ease-in forwards";
   leftArrow.style.animation = "hideArrows .15s ease-in forwards";
   rightArrow.style.animation = "hideArrows .15s ease-in forwards";
