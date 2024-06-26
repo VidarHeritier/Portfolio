@@ -40,6 +40,7 @@ const projects = [
     title: "Find your inner funky cat",
     description:
       "A stylish drum machine, where you can play drums to three different songs",
+    link: "https://vidarheritier.github.io/DrumKitKat/",
     id: 1,
   },
   {
@@ -49,6 +50,7 @@ const projects = [
     title: "Weight converter",
     description:
       "Type a weight in and find out what it amounts to on different celestial bodies",
+    link: "https://vidarheritier.github.io/sommerProsjektRevamped/",
     id: 2,
   },
   {
@@ -57,6 +59,7 @@ const projects = [
     alt: "My personal art portfolio",
     title: "Art portfolio",
     description: "I made this site to display my art",
+    link: "https://vidarheritier.github.io/First-assignment-html---css/",
     id: 3,
   },
   {
@@ -66,6 +69,7 @@ const projects = [
     title: "Password generator",
     description:
       "A simple password generator themed after the movie the Matrix",
+    link: "https://vidarheritier.github.io/Pass-Gen/",
     id: 4,
   },
   {
@@ -74,16 +78,20 @@ const projects = [
     alt: "A note taking site, where your notes are clouds",
     title: "Cloudea! Ideas in the cloud",
     description: "A note taking site where you put your ideas in the clouds",
+    link: "https://vidarheritier.github.io/ToDobidoo/",
     id: 5,
   },
 ];
-// /** Check Mark */
-// const checkMark = document.querySelector('img[src="/Images/check.svg"]');
+/** Check Mark */
+const checkMark = document.querySelector('img[src="/Images/check.svg"]');
 
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
 const contactPage = document.querySelector(".contact-page");
 const contactText = document.querySelector(".contact-text");
+
+const mail = document.querySelector(".mail");
+const telephone = document.querySelector(".telephone");
 /**Page Header */
 const placeholder = document.querySelector(".placeholder-text");
 
@@ -318,7 +326,6 @@ function switchToPage(page, headerText, pageContent) {
 let currentProjectIndex = 0;
 
 const setOriginalPosition = () => {
-  const modalImg = document.getElementById("modal-img");
   const currentProject = projects[currentProjectIndex];
   const imgElement = document.querySelector(`img[src="${currentProject.src}"]`);
 
@@ -349,6 +356,7 @@ const updateModalContent = () => {
   const modalDescription = document.getElementById("modal-description");
   modalImg.src = project.src;
   modalDescription.textContent = project.description;
+  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="/Images/check.svg" class="check" alt="Check Mark"></a>`;
 };
 
 const showNextProject = () => {
@@ -394,24 +402,12 @@ function openModal(event) {
   // Set modal image and description
   modalImg.src = clickedImg.src;
   modalDescription.textContent = clickedImg.description;
+  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="/Images/check.svg" class="check" alt="Check Mark"></a>`;
 
   // Calculate the position of the clicked image
   const imgRect = clickedImg.getBoundingClientRect();
 
-  // Store the original position of the clicked image
-  originalPosition = {
-    top: imgRect.top,
-    left: imgRect.left,
-    width: imgRect.width,
-    height: imgRect.height,
-  };
-
-  // Set initial position of modal content to match clicked image
-  modalContent.style.top = `${imgRect.top}px`;
-  modalContent.style.left = `${imgRect.left}px`;
-  modalContent.style.width = `${imgRect.width}px`;
-  modalContent.style.height = `${imgRect.height}px`;
-  modalContent.style.transform = `translate(0, 0) scale(1)`;
+  setOriginalPosition();
 
   // Show modal
   modal.style.display = "block";
@@ -446,12 +442,11 @@ function openModal(event) {
 
 function closeModal() {
   const modal = document.getElementById("modal");
-  const modalContent = document.querySelector(".modal-content");
+
   const modalDescription = document.getElementById("modal-description");
   const projectImgs1 = document.querySelectorAll(".big-project");
 
   // Animate modal content back to original size and position
-
   setOriginalPosition();
   modalDescription.style.animation = "descRemove .15s ease-in forwards";
   leftArrow.style.animation = "hideArrows .15s ease-in forwards";
@@ -482,7 +477,9 @@ function closeModalOnOutsideClick(event) {
   if (
     modalContent.style.display === "block" &&
     !arrows.entries(event.target) &&
-    !hamburgerItems.entries(event.target)
+    !hamburgerItems.entries(event.target) &&
+    !menuItems.entries(event.target) &&
+    !checkMark.entries(event.target)
   ) {
     closeModal();
   }
@@ -502,6 +499,9 @@ function showWelcomePage(pageContent) {
   welcomePage.style.animation = "fadeInText .3s ease-in";
 
   placeholder.textContent = "VirVar Vidar";
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
 
   restartAnimation(placeholder, "pageHeader 0.3s forwards");
 
