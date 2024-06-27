@@ -493,6 +493,48 @@ document.addEventListener("keydown", (event) => {
 
 // Break
 
+/**Contact obfuscation */
+// Array of email parts (not in order)
+const emailParts = [
+  "dar",
+  "g",
+  "com",
+  "vi",
+  "heri",
+  "ti",
+  "@",
+  "er",
+  "mail",
+  ".",
+];
+
+// Array of telephone number parts (not in order)
+const telephoneParts = ["93", "86", "97", "74"];
+
+// Correct order for the email parts
+const emailOrder = [3, 0, 4, 5, 7, 6, 1, 8, 9, 2];
+
+// Correct order for the telephone number parts
+const telephoneOrder = [2, 1, 3, 0];
+
+// Function to assemble the email parts in the correct order
+function assembleEmail(parts, order) {
+  const orderedParts = order.map((index) => parts[index]);
+  const email = orderedParts.join("");
+  mail.textContent = email;
+}
+
+// Function to assemble the telephone parts in the correct order
+function assembleTelephone(parts, order) {
+  const orderedParts = order.map((index) => parts[index]);
+  const phoneNumber = orderedParts.join("");
+  telephone.textContent = phoneNumber;
+}
+
+// Call the functions to set the content of the elements
+assembleEmail(emailParts, emailOrder);
+assembleTelephone(telephoneParts, telephoneOrder);
+
 /**Show the welcome page */
 function showWelcomePage(pageContent) {
   welcomePage.style.visibility = "visible";
