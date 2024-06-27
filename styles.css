@@ -177,6 +177,7 @@ canvas {
   line-height: 0.3vh;
   scale: 0.6;
   margin: 5vh;
+  letter-spacing: 0.08vw;
 }
 .project-page {
   visibility: collapse;
@@ -234,12 +235,18 @@ canvas {
   margin: 5vh;
   width: 50%;
   line-height: 4vh;
-  word-spacing: 0.3vw;
+  word-spacing: 0.2vw;
+  letter-spacing: 0.08vw;
 }
 .contact-text li {
+  display: flex;
+  flex-direction: row;
   width: fit-content;
   margin-left: 3vw;
   margin-bottom: 2vh;
+}
+.info {
+  margin-left: 3vw;
 }
 .placeholder {
   text-align: center;
