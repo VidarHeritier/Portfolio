@@ -35,7 +35,7 @@ const arrows = document.querySelectorAll(".arrows");
 const projects = [
   {
     key: "project1",
-    src: "https://i.ibb.co/37xpWFW/Screenshot-2024-06-25-at-14-43-27.png",
+    src: "./Images/Drum.webp",
     alt: "Drum simulator",
     title: "Find your inner funky cat",
     description:
@@ -45,7 +45,7 @@ const projects = [
   },
   {
     key: "project2",
-    src: "https://i.ibb.co/hD5FLWc/Screenshot-2024-06-25-at-14-53-48.png",
+    src: "./Images/Weight.webp",
     alt: "What would you weight on different celestial bodies",
     title: "Weight converter",
     description:
@@ -55,7 +55,7 @@ const projects = [
   },
   {
     key: "project3",
-    src: "https://i.ibb.co/9VgTZnN/Screenshot-2024-06-25-at-14-57-51.png",
+    src: "./Images/Art.webp",
     alt: "My personal art portfolio",
     title: "Art portfolio",
     description: "I made this site to display my art",
@@ -64,7 +64,7 @@ const projects = [
   },
   {
     key: "project4",
-    src: "https://i.ibb.co/bgKJPtp/Screenshot-2024-06-25-at-15-01-18.png",
+    src: "./Images/Pass.webp",
     alt: "Password generator themed after the movie the Matrix",
     title: "Password generator",
     description:
@@ -74,7 +74,7 @@ const projects = [
   },
   {
     key: "project5",
-    src: "https://i.ibb.co/wLjBj38/Screenshot-2024-06-25-at-15-07-29.png",
+    src: "./Images/PostIt.webp",
     alt: "A note taking site, where your notes are clouds",
     title: "Cloudea! Ideas in the cloud",
     description: "A note taking site where you put your ideas in the clouds",
