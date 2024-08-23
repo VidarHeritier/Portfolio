@@ -238,6 +238,7 @@ canvas {
   line-height: 4vh;
   word-spacing: 0.2vw;
   letter-spacing: 0.08vw;
+  margin-top: -30vh;
 }
 .contact-text li {
   display: flex;
@@ -798,6 +799,7 @@ canvas {
   }
   .contact-text {
     text-align: justify;
+    margin-top: 55%;
   }
   .info-container {
     transform: translateX(-2rem);
