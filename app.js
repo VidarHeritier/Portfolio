@@ -356,7 +356,7 @@ const updateModalContent = () => {
   const modalDescription = document.getElementById("modal-description");
   modalImg.src = project.src;
   modalDescription.textContent = project.description;
-  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="https://vidarheritier.github.io/Images/check.svg" class="check" alt="Check Mark"></a>`;
+  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="https://vidarheritier.github.io/Images/check.webp" class="check" alt="Check Mark"></a>`;
 };
 
 const showNextProject = () => {
