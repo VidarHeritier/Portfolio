@@ -35,7 +35,7 @@ const arrows = document.querySelectorAll(".arrows");
 const projects = [
   {
     key: "project1",
-    src: "./Images/Drum.webp",
+    src: "https://vidarheritier.github.io/Portfolio/Images/Drum.webp",
     alt: "Drum simulator",
     title: "Find your inner funky cat",
     description:
@@ -45,7 +45,7 @@ const projects = [
   },
   {
     key: "project2",
-    src: "./Images/Weight.webp",
+    src: "https://vidarheritier.github.io/Portfolio/Images/Weight.webp",
     alt: "What would you weight on different celestial bodies",
     title: "Weight converter",
     description:
@@ -55,7 +55,7 @@ const projects = [
   },
   {
     key: "project3",
-    src: "./Images/Art.webp",
+    src: "https://vidarheritier.github.io/Portfolio/Images/Art.webp",
     alt: "My personal art portfolio",
     title: "Art portfolio",
     description: "I made this site to display my art",
@@ -64,7 +64,7 @@ const projects = [
   },
   {
     key: "project4",
-    src: "./Images/Pass.webp",
+    src: "https://vidarheritier.github.io/Portfolio/Images/Pass.webp",
     alt: "Password generator themed after the movie the Matrix",
     title: "Password generator",
     description:
@@ -74,7 +74,7 @@ const projects = [
   },
   {
     key: "project5",
-    src: "./Images/PostIt.webp",
+    src: "https://vidarheritier.github.io/Portfolio/Images/PostIt.webp",
     alt: "A note taking site, where your notes are clouds",
     title: "Cloudea! Ideas in the cloud",
     description: "A note taking site where you put your ideas in the clouds",
