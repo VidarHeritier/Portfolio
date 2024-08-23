@@ -356,7 +356,7 @@ const updateModalContent = () => {
   const modalDescription = document.getElementById("modal-description");
   modalImg.src = project.src;
   modalDescription.textContent = project.description;
-  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="/Images/check.svg" class="check" alt="Check Mark"></a>`;
+  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="./Images/check.svg" class="check" alt="Check Mark"></a>`;
 };
 
 const showNextProject = () => {
@@ -618,35 +618,6 @@ const scrollSensitivity = 500;
 let isScrolling = false;
 let isSwipe = false;
 
-// /** Swipe Detection (combined with touch events) */
-// let swipeDirection = 0;
-// let initialX = null;
-// let initialY = null;
-
-// window.addEventListener("touchstart", function (e) {
-//   initialX = e.changedTouches[0].clientX;
-//   initialY = e.changedTouches[0].clientY;
-//   initialTime = new Date();
-// });
-
-// window.addEventListener("touchend", function (e) {
-//   const deltaX = Math.abs(e.changedTouches[0].clientX - initialX);
-//   const deltaY = Math.abs(e.changedTouches[0].clientY - initialY);
-//   const deltaTime = new Date() - initialTime;
-
-//   if (deltaX >= 30 && deltaY <= 100 && deltaTime <= 300) {
-//     swipeDirection = -1 * Math.sign(e.changedTouches[0].clientX - initialX);
-//   }
-
-//   if (Math.abs(deltaX) >= 30 && deltaY <= 100 && deltaTime <= 300) {
-//     isSwipe = true;
-
-//     setTimeout(() => {
-//       isSwipe = false;
-//       handlePageChange(swipeDirection);
-//     }, 500);
-//   }
-// });
 let swipeDirection = 0;
 let startX;
 window.addEventListener("touchstart", function (e) {
