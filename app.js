@@ -83,7 +83,9 @@ const projects = [
   },
 ];
 /** Check Mark */
-const checkMark = document.querySelector('img[src="/Images/check.svg"]');
+const checkMark = document.querySelector(
+  'img[src="https://vidarheritier.github.io/Portfolio/Images/check.webp"]'
+);
 
 /**Contact Page */
 const contactLink = document.querySelector(".menu3");
@@ -402,7 +404,7 @@ function openModal(event) {
   // Set modal image and description
   modalImg.src = clickedImg.src;
   modalDescription.textContent = clickedImg.description;
-  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="/Images/check.svg" class="check" alt="Check Mark"></a>`;
+  modalDescription.innerHTML = `${project.description} </br></br> <a href="${project.link}" target="_blank"><img src="https://vidarheritier.github.io/Portfolio/Images/check.webp" class="check" alt="Check Mark"></a>`;
 
   // Calculate the position of the clicked image
   const imgRect = clickedImg.getBoundingClientRect();
